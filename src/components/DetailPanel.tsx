@@ -1,225 +1,443 @@
 "use client";
 
+import { motion, AnimatePresence } from "framer-motion";
 import { useRoadmapStore } from "@/lib/store";
 
+const levelColor: Record<string, string> = {
+  beginner: "#1D9E75",
+  intermediate: "#BA7517",
+  advanced: "#D85A30",
+};
+
 export function DetailPanel() {
-  const { selectedNode, selectedPhase, isPanelOpen, clearSelected, toggleComplete, isCompleted } =
-    useRoadmapStore();
+  const {
+    selectedNode,
+    selectedPhase,
+    clearSelected,
+    toggleComplete,
+    isCompleted,
+  } = useRoadmapStore();
 
-  if (!selectedNode || !selectedPhase) return null;
-
-  const isDone = isCompleted(selectedNode.id);
-
-  const levelLabel: Record<string, string> = {
-    beginner: "Beginner",
-    intermediate: "Intermediate",
-    advanced: "Advanced",
-  };
-
-  const levelColor: Record<string, string> = {
-    beginner: "#1D9E75",
-    intermediate: "#BA7517",
-    advanced: "#D85A30",
-  };
+  const isDone = selectedNode ? isCompleted(selectedNode.id) : false;
 
   return (
-    <>
-      {/* Backdrop on mobile */}
-      <div
-        className="fixed inset-0 z-10 lg:hidden"
-        style={{
-          background: "rgba(0,0,0,0.6)",
-          opacity: isPanelOpen ? 1 : 0,
-          pointerEvents: isPanelOpen ? "auto" : "none",
-          transition: "opacity 0.2s",
-        }}
-        onClick={clearSelected}
-      />
-
-      {/* Panel */}
-      <aside
-        className="fixed right-0 top-0 z-20 h-full flex flex-col overflow-y-auto"
-        style={{
-          width: 320,
-          background: "#111116",
-          borderLeft: "1px solid #1e1e2a",
-          padding: "24px 20px",
-          transform: isPanelOpen ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          gap: 0,
-        }}
-      >
-        {/* Close */}
-        <button
-          onClick={clearSelected}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-400 transition-colors"
-          style={{ fontSize: 18, lineHeight: 1 }}
-          aria-label="Close panel"
-        >
-          ✕
-        </button>
-
-        {/* Phase badge */}
-        <div
-          className="text-xs font-semibold tracking-widest uppercase rounded-full w-fit mb-3"
-          style={{
-            padding: "3px 10px",
-            background: selectedPhase.bg,
-            color: selectedPhase.accent,
-            border: `1px solid ${selectedPhase.accent}33`,
-            fontSize: 9,
-          }}
-        >
-          {selectedPhase.title}
-        </div>
-
-        {/* Icon + Title */}
-        <div className="flex items-center gap-3 mb-4">
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
-            style={{ background: selectedPhase.bg }}
-          >
-            {selectedNode.icon}
-          </div>
-          <div>
-            <h2 className="font-semibold text-white leading-tight" style={{ fontSize: 15 }}>
-              {selectedNode.label}
-            </h2>
-            <span
-              className="text-xs font-medium rounded-full"
-              style={{
-                color: levelColor[selectedNode.level],
-                fontSize: 10,
-              }}
-            >
-              {levelLabel[selectedNode.level]}
-            </span>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div style={{ height: 1, background: "#1e1e2a", margin: "0 0 16px" }} />
-
-        {/* Concept */}
-        <div className="mb-4">
-          <SectionLabel>Concept</SectionLabel>
-          <p className="text-gray-400 leading-relaxed" style={{ fontSize: 12.5 }}>
-            {selectedNode.concept}
-          </p>
-        </div>
-
-        {/* Key points */}
-        <div className="mb-4">
-          <SectionLabel>Key points</SectionLabel>
-          <ul className="space-y-2">
-            {selectedNode.keyPoints.map((point, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <div
-                  className="mt-1.5 rounded-full flex-shrink-0"
-                  style={{ width: 4, height: 4, background: selectedPhase.accent }}
-                />
-                <span className="text-gray-500 leading-relaxed" style={{ fontSize: 12 }}>
-                  {point}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Project idea */}
-        <div className="mb-4">
-          <SectionLabel>Project idea</SectionLabel>
-          <div
-            className="rounded-xl p-3"
-            style={{ background: "#0a0a12", border: `1px solid ${selectedPhase.accent}22` }}
-          >
-            <div
-              className="text-xs font-semibold tracking-widest uppercase mb-1.5"
-              style={{ color: selectedPhase.accent, fontSize: 9 }}
-            >
-              Build this
-            </div>
-            <p className="leading-relaxed" style={{ fontSize: 12, color: "#8080aa" }}>
-              {selectedNode.project}
-            </p>
-          </div>
-        </div>
-
-        {/* Stack */}
-        {selectedNode.stack.length > 0 && (
-          <div className="mb-4">
-            <SectionLabel>Tech stack</SectionLabel>
-            <div className="flex flex-wrap gap-1.5">
-              {selectedNode.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full text-xs"
-                  style={{
-                    padding: "2px 8px",
-                    background: "#1a1a2a",
-                    color: "#6666aa",
-                    fontSize: 11,
-                    border: "1px solid #2a2a3a",
-                  }}
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Resources */}
-        {selectedNode.resources.length > 0 && (
-          <div className="mb-6">
-            <SectionLabel>Resources</SectionLabel>
-            <ul className="space-y-1.5">
-              {selectedNode.resources.map((r, i) => (
-                <li key={i}>
-                  <a
-                    href={r.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 transition-colors"
-                    style={{ color: "#7F77DD", fontSize: 12 }}
-                  >
-                    <span>↗</span>
-                    <span className="hover:underline">{r.title}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Mark complete */}
-        <div className="mt-auto pt-4" style={{ borderTop: "1px solid #1e1e2a" }}>
-          <button
-            onClick={() => toggleComplete(selectedNode.id)}
-            className="w-full rounded-xl font-medium transition-all duration-200"
+    <div
+      style={{
+        width: 340,
+        flexShrink: 0,
+        background: "#0e0f14",
+        borderLeft: "1px solid #1c1c24",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        overflow: "hidden",
+      }}
+    >
+      <AnimatePresence mode="wait">
+        {!selectedNode ? (
+          /* ── Empty state ── */
+          <motion.div
+            key="empty"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             style={{
-              padding: "10px",
-              background: isDone ? "#1a2a1a" : "#1D9E75",
-              color: isDone ? "#1D9E75" : "#fff",
-              border: isDone ? "1px solid #1D9E7544" : "none",
-              fontSize: 13,
-              cursor: "pointer",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 14,
+              padding: 32,
             }}
           >
-            {isDone ? "✓ Marked as complete" : "Mark as complete"}
-          </button>
-        </div>
-      </aside>
-    </>
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: "50%",
+                border: "2px solid #252530",
+              }}
+            />
+            <p
+              style={{
+                fontSize: 12,
+                color: "#383848",
+                textAlign: "center",
+                maxWidth: 180,
+                lineHeight: 1.6,
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              Click any node on the path to explore the topic
+            </p>
+          </motion.div>
+        ) : (
+          /* ── Node detail ── */
+          <motion.div
+            key={selectedNode.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              overflow: "hidden",
+            }}
+          >
+            {/* Header */}
+            <div
+              style={{
+                position: "relative",
+                background: selectedPhase!.bg,
+                borderBottom: `1px solid ${selectedPhase!.accent}22`,
+                padding: "18px 18px 18px",
+                flexShrink: 0,
+              }}
+            >
+              {/* Top accent bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 3,
+                  background: selectedPhase!.accent,
+                }}
+              />
+
+              {/* Close */}
+              <button
+                onClick={clearSelected}
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 16,
+                  color: "#444",
+                  fontSize: 15,
+                  lineHeight: 1,
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  padding: 4,
+                }}
+              >
+                ✕
+              </button>
+
+              {/* Phase pill */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  padding: "3px 9px",
+                  borderRadius: 20,
+                  background: `${selectedPhase!.accent}14`,
+                  border: `1px solid ${selectedPhase!.accent}22`,
+                  marginBottom: 12,
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: 9,
+                    color: selectedPhase!.accent,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    fontWeight: 700,
+                    fontFamily: "monospace",
+                  }}
+                >
+                  Phase {selectedPhase!.phaseNumber} · {selectedPhase!.title}
+                </span>
+              </div>
+
+              {/* Icon + title */}
+              <div style={{ display: "flex", alignItems: "center", gap: 14, paddingRight: 28 }}>
+                <div
+                  style={{
+                    width: 52,
+                    height: 52,
+                    borderRadius: "50%",
+                    background: `${selectedPhase!.accent}18`,
+                    border: `2px solid ${selectedPhase!.accent}28`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 22,
+                    flexShrink: 0,
+                  }}
+                >
+                  {selectedNode.icon}
+                </div>
+                <div>
+                  <h2
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "#fff",
+                      marginBottom: 6,
+                      fontFamily: "var(--font-sans)",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {selectedNode.label}
+                  </h2>
+                  <span
+                    style={{
+                      padding: "2px 8px",
+                      borderRadius: 20,
+                      background: `${levelColor[selectedNode.level]}14`,
+                      color: levelColor[selectedNode.level],
+                      fontSize: 10,
+                      border: `1px solid ${levelColor[selectedNode.level]}28`,
+                      fontFamily: "monospace",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {selectedNode.level.charAt(0).toUpperCase() +
+                      selectedNode.level.slice(1)}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Scrollable body */}
+            <div
+              style={{ flex: 1, overflowY: "auto", padding: "18px 18px 0" }}
+            >
+              <Section label="Concept" accent={selectedPhase!.accent}>
+                <p
+                  style={{
+                    fontSize: 12.5,
+                    color: "#6a6a88",
+                    lineHeight: 1.75,
+                    fontFamily: "var(--font-sans)",
+                  }}
+                >
+                  {selectedNode.concept}
+                </p>
+              </Section>
+
+              <Section label="Key Points" accent={selectedPhase!.accent}>
+                <ul style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {selectedNode.keyPoints.map((point, i) => (
+                    <li
+                      key={i}
+                      style={{ display: "flex", alignItems: "flex-start", gap: 10 }}
+                    >
+                      <div
+                        style={{
+                          width: 4,
+                          height: 4,
+                          borderRadius: "50%",
+                          background: selectedPhase!.accent,
+                          marginTop: 7,
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span
+                        style={{
+                          fontSize: 12,
+                          color: "#555570",
+                          lineHeight: 1.65,
+                          fontFamily: "var(--font-sans)",
+                        }}
+                      >
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+
+              <Section label="Project Idea" accent={selectedPhase!.accent}>
+                <div
+                  style={{
+                    background: "#090912",
+                    borderRadius: 10,
+                    padding: "12px 14px",
+                    borderTop: `1px solid ${selectedPhase!.accent}18`,
+                    borderRight: `1px solid ${selectedPhase!.accent}18`,
+                    borderBottom: `1px solid ${selectedPhase!.accent}18`,
+                    borderLeft: `3px solid ${selectedPhase!.accent}`,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 9,
+                      color: selectedPhase!.accent,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      fontWeight: 700,
+                      marginBottom: 8,
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    Build this →
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 12,
+                      color: "#5a5a78",
+                      lineHeight: 1.7,
+                      fontFamily: "var(--font-sans)",
+                    }}
+                  >
+                    {selectedNode.project}
+                  </p>
+                </div>
+              </Section>
+
+              {selectedNode.stack.length > 0 && (
+                <Section label="Tech Stack" accent={selectedPhase!.accent}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {selectedNode.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        style={{
+                          padding: "3px 9px",
+                          background: "#111120",
+                          color: "#5a5a88",
+                          fontSize: 10.5,
+                          border: "1px solid #1e1e30",
+                          borderRadius: 8,
+                          fontFamily: "monospace",
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </Section>
+              )}
+
+              {selectedNode.resources.length > 0 && (
+                <Section label="Resources" accent={selectedPhase!.accent}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    {selectedNode.resources.map((r, i) => (
+                      <a
+                        key={i}
+                        href={r.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 10,
+                          padding: "10px 12px",
+                          background: "#111120",
+                          border: "1px solid #1e1e2e",
+                          borderRadius: 10,
+                          textDecoration: "none",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 26,
+                            height: 26,
+                            borderRadius: 8,
+                            background: `${selectedPhase!.accent}14`,
+                            color: selectedPhase!.accent,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: 11,
+                            flexShrink: 0,
+                          }}
+                        >
+                          ↗
+                        </div>
+                        <span
+                          style={{
+                            fontSize: 12,
+                            color: "#7F77DD",
+                            fontFamily: "var(--font-sans)",
+                          }}
+                        >
+                          {r.title}
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </Section>
+              )}
+
+              <div style={{ height: 16 }} />
+            </div>
+
+            {/* Footer */}
+            <div
+              style={{
+                padding: "12px 18px",
+                borderTop: "1px solid #1c1c24",
+                background: "#0c0c12",
+                flexShrink: 0,
+              }}
+            >
+              <button
+                onClick={() => toggleComplete(selectedNode.id)}
+                style={{
+                  width: "100%",
+                  padding: "12px",
+                  borderRadius: 12,
+                  background: isDone ? "#0a180a" : selectedPhase!.accent,
+                  color: isDone ? "#1D9E75" : "#fff",
+                  border: isDone
+                    ? "1px solid #1D9E7530"
+                    : "1px solid transparent",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  fontFamily: "var(--font-sans)",
+                  transition: "all 0.2s",
+                }}
+              >
+                {isDone ? "✓  Marked as complete" : "Mark as complete"}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function Section({
+  label,
+  accent,
+  children,
+}: {
+  label: string;
+  accent: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div
-      className="font-semibold tracking-widest uppercase mb-2"
-      style={{ fontSize: 9, color: "#444", letterSpacing: "0.1em" }}
-    >
+    <div style={{ marginBottom: 18 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          marginBottom: 10,
+        }}
+      >
+        <span
+          style={{
+            fontSize: 9,
+            color: accent,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            fontWeight: 700,
+            fontFamily: "monospace",
+          }}
+        >
+          {label}
+        </span>
+        <div style={{ flex: 1, height: 1, background: "#1c1c24" }} />
+      </div>
       {children}
     </div>
   );
