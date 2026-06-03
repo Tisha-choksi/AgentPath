@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useRoadmapStore } from "@/lib/store";
+import { useRoadmap } from "@/contexts/RoadmapContext";
 
 const levelColor: Record<string, string> = {
   beginner: "#1D9E75",
@@ -16,7 +16,7 @@ export function DetailPanel() {
     clearSelected,
     toggleComplete,
     isCompleted,
-  } = useRoadmapStore();
+  } = useRoadmap();
 
   const isDone = selectedNode ? isCompleted(selectedNode.id) : false;
 

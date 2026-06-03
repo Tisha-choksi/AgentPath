@@ -1,12 +1,19 @@
 "use client";
 
-import { roadmapData } from "@/data/roadmap";
+import Link from "next/link";
 import { TopicNode } from "./TopicNode";
-import { useRoadmapStore } from "@/lib/store";
+import { useRoadmap } from "@/contexts/RoadmapContext";
 
-export function RoadmapCanvas() {
-  const { completed } = useRoadmapStore();
-  const totalNodes = roadmapData.reduce((acc, p) => acc + p.nodes.length, 0);
+export function RoadmapCanvas({
+  title,
+  backHref,
+}: {
+  title: string;
+  backHref?: string;
+}) {
+  const { phases, completed } = useRoadmap();
+  const roadmapData = phases;
+  const totalNodes = phases.reduce((acc, p) => acc + p.nodes.length, 0);
   const progress = Math.round((completed.length / totalNodes) * 100);
 
   return (
@@ -26,7 +33,26 @@ export function RoadmapCanvas() {
           backdropFilter: "blur(12px)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {backHref && (
+            <Link
+              href={backHref}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                fontSize: 11,
+                color: "#44445a",
+                textDecoration: "none",
+                padding: "4px 8px",
+                borderRadius: 6,
+                border: "1px solid #1c1c24",
+                transition: "color 0.15s",
+              }}
+            >
+              ← Hub
+            </Link>
+          )}
           <div
             style={{
               width: 28,
@@ -53,7 +79,7 @@ export function RoadmapCanvas() {
               letterSpacing: "-0.4px",
             }}
           >
-            <span style={{ color: "#7F77DD" }}>Agent</span>Path
+            {title}
           </span>
         </div>
 

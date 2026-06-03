@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRoadmapStore } from "@/lib/store";
+import { useRoadmap } from "@/contexts/RoadmapContext";
 import type { RoadmapNode, RoadmapPhase } from "@/data/roadmap";
 
 export function TopicNode({
@@ -11,7 +11,7 @@ export function TopicNode({
   node: RoadmapNode;
   phase: RoadmapPhase;
 }) {
-  const { selectedNodeId, setSelected, isCompleted } = useRoadmapStore();
+  const { selectedNodeId, setSelected, isCompleted } = useRoadmap();
   const isActive = selectedNodeId === node.id;
   const isDone = isCompleted(node.id);
 
