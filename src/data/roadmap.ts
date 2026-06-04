@@ -361,93 +361,113 @@ Master these six concepts — Transformers, Self-Attention, Tokenization, Contex
           "Closed weight: API-only — GPT-4o, Claude, Gemini — best perf, no infra, vendor lock-in",
           "Foundation model = large pretrained model on internet-scale data — base for all downstream apps",
         ],
-        deepDive: `# Model Types & Families — Complete Reference
+        deepDive: `A model family is a collection of models built using the same architecture and training methodology but released in different sizes or versions.
 
-## 1. What is a Model Family?
-
-A model family is a collection of models built using the same architecture and training methodology but released in different sizes or versions.
-
-Examples:
+Family lineages:
 
 GPT Family: GPT-1 → GPT-2 → GPT-3 → GPT-3.5 → GPT-4 → GPT-4 Turbo → GPT-4o
 Llama Family: Llama 1 → Llama 2 → Llama 3 → Llama 3.1 → Llama 4
 Qwen Family: Qwen 1 → Qwen 2 → Qwen 2.5 → Qwen 3
 Gemini Family: Gemini 1.0 → Gemini 1.5 → Gemini 2.x
 
-## 2. Open Weight vs Closed Weight
+1. Open Weight vs Closed Weight
 
 Open Weight models are publicly available. You can download, fine-tune, host, and modify them. Examples: Llama, Qwen, Mistral, Gemma, DeepSeek. Advantages: full control, privacy, custom fine-tuning, lower long-term costs. Disadvantages: need GPUs, infrastructure management, maintenance.
 
 Closed Weight models hide their weights — API-only access. Examples: GPT-4o, Claude, Gemini. Advantages: best performance, no infrastructure, easy deployment. Disadvantages: API costs, vendor lock-in, limited customization.
 
-## 3. Foundation Models
+2. Foundation Models
 
 A Foundation Model is a large pretrained model trained on massive datasets. These models learn language, reasoning, coding, and general knowledge. They serve as the base for many downstream applications. Examples: GPT-4o, Claude, Gemini, Llama, Qwen.
 
-## 4. Base Models
+3. Base Models
 
 A Base Model is trained only for next-token prediction. It has not been instructed to behave like a chatbot. Prompt "What is the capital of France?" may continue text unpredictably. Characteristics: raw language modeling, not aligned, not instruction-following. Examples: Llama Base, GPT Base models.
 
 Base Model → further trained → Instruct Model
 Instruct Model → conversational tuning → Chat Model
 
-## 5. Instruct Models
+4. Instruct Models
 
 Base models are further trained to follow instructions. Prompt "Explain quantum computing in simple terms" gets a proper response. Characteristics: better instruction following, safer outputs, better user interactions. Examples: Llama Instruct, Qwen Instruct, GPT Chat models.
 
-## 6. Chat Models
+5. Chat Models
 
 Built specifically for conversations. Features: multi-turn memory, conversational tuning, human preference alignment. Examples: ChatGPT, Claude, Gemini Chat, Llama Chat. Applications: assistants, customer support, research agents.
 
-## 7. Reasoning Models
+6. Reasoning Models
 
 Designed to perform deeper reasoning before answering. Characteristics: multi-step thinking, planning, problem solving, tool usage. Examples: OpenAI reasoning models, DeepSeek-R1, Qwen reasoning variants. Applications: math, coding, agent planning, complex decision making.
 
-## 8. Code Models
+7. Code Models
 
 Specialized for programming tasks. Training data: GitHub repositories, documentation, source code. Capabilities: code generation, debugging, refactoring, test creation. Examples: Codex, DeepSeek-Coder, CodeLlama, Qwen-Coder. Applications: AI software engineers, coding assistants.
 
-## 9. Embedding Models
+8. Embedding Models
 
 These models generate vectors, not text. Input "How to learn machine learning?" → Output [0.12, -0.44, 0.77, ...]. Applications: semantic search, RAG, similarity search, recommendations. Examples: text-embedding-3-small, text-embedding-3-large, BGE, E5.
 
-## 10. Reranker Models
+9. Reranker Models
 
-Used after retrieval to improve quality. Workflow: User Query → Vector Search → Top 50 Docs → Reranker → Top 5 Docs → LLM. Purpose: improve retrieval quality, increase RAG accuracy. Examples: BGE Reranker, Cohere Reranker.
+Used after retrieval to improve quality. Workflow:
 
-## 11. Multimodal Models
+User Query
+↓
+Vector Search
+↓
+Top 50 Docs
+↓
+Reranker
+↓
+Top 5 Docs
+↓
+LLM
+
+Purpose: improve retrieval quality, increase RAG accuracy. Examples: BGE Reranker, Cohere Reranker.
+
+10. Multimodal Models
 
 Process multiple data types: text, images, audio, video. Examples: GPT-4o, Gemini, Claude, Qwen-VL. Applications: image analysis, document understanding, visual agents.
 
-## 12. Vision-Language Models (VLMs)
+11. Vision-Language Models (VLMs)
 
 Specialized multimodal models. Can understand: screenshots, diagrams, charts, documents. Examples: GPT-4o Vision, Gemini Vision, LLaVA, Qwen-VL. Applications: OCR, UI automation, medical imaging.
 
-## 13. Speech Models
+12. Speech Models
 
 Speech-to-Text: Whisper, Deepgram. Text-to-Speech: ElevenLabs, OpenAI TTS. Applications: voice agents, call centers, meeting assistants.
 
-## 14. Small Language Models (SLMs)
+13. Small Language Models (SLMs)
 
 Smaller models — usually 1B–10B parameters. Examples: Phi, Gemma Small, TinyLlama. Advantages: faster, cheaper, local deployment. Applications: edge devices, mobile AI, lightweight agents.
 
-## 15. Large Language Models (LLMs)
+14. Large Language Models (LLMs)
 
 Typically 20B–1000B+ parameters. Examples: GPT-4o, Claude, Gemini, Llama 405B. Advantages: better reasoning, generalization, more knowledge. Applications: enterprise AI, research agents, complex automation.
 
-## 16. Mixture of Experts (MoE)
+15. Mixture of Experts (MoE)
 
-Instead of activating the whole model, only selected experts are used. Architecture: Input → Router → Selected Experts → Output. Advantages: faster inference, lower compute, larger effective capacity. Examples: DeepSeek-V3, Mixtral, some Gemini variants.
+Instead of activating the whole model, only selected experts are used. Architecture:
 
-## 17. Domain-Specific Models
+Input
+↓
+Router
+↓
+Selected Experts
+↓
+Output
+
+Advantages: faster inference, lower compute, larger effective capacity. Examples: DeepSeek-V3, Mixtral, some Gemini variants.
+
+16. Domain-Specific Models
 
 Fine-tuned for specific industries. Medical: clinical LLMs, healthcare assistants. Legal: contract analysis, legal research. Finance: risk analysis, trading systems.
 
-## 18. Agent-Oriented Models
+17. Agent-Oriented Models
 
 Optimized for tool calling and workflows. Capabilities: function calling, structured outputs, planning, tool selection. Examples: GPT-4o, Claude, Gemini, Qwen-Agent variants. Applications: AI agents, multi-agent systems, autonomous workflows.
 
-## What Every AI Engineer Should Know
+What Every AI Engineer Should Know
 
 Model Categories: Base, Instruct, Chat, Reasoning, Code, Embedding, Multimodal
 Model Access: Open Weight vs Closed Weight
@@ -477,13 +497,9 @@ Major Families: GPT, Claude, Gemini, Llama, Qwen, Mistral, DeepSeek, Gemma`,
           "Streaming: token-by-token delivery — TTFT (time to first token) is the critical UX metric",
           "Cost = (input_tokens × input_rate) + (output_tokens × output_rate) — history, RAG, and agent loops are hidden multipliers",
         ],
-        deepDive: `# Parameters, Streaming & Pricing — Complete Reference
+        deepDive: `Parameters control how an LLM generates responses. Without changing the model itself, you can make it more creative, deterministic, concise, diverse, or focused.
 
-## 1. Model Parameters
-
-Parameters control how an LLM generates responses. Without changing the model itself, you can make it more creative, deterministic, concise, diverse, or focused.
-
-### Temperature
+Temperature
 
 The most important generation parameter. Controls randomness in token selection.
 
@@ -493,40 +509,39 @@ Medium Temperature (0.5–0.8): Balanced creativity and consistency. Best for ge
 
 High Temperature (1.0–2.0): Creative, diverse, unpredictable. Best for story writing, brainstorming, creative content. Each response to "Write a fantasy kingdom" may be completely different.
 
-### Top-P (Nucleus Sampling)
+Top-P (Nucleus Sampling)
 
-Controls how many possible next tokens are considered. Instead of looking at all possible tokens, the model only considers the most likely tokens whose cumulative probability reaches P. Example: Top-P = 0.9 uses only the top 90% probability mass.
-
-Low Top-P: safer, more focused. High Top-P: more diverse, more creative.
+Controls how many possible next tokens are considered. Instead of looking at all possible tokens, the model only considers the most likely tokens whose cumulative probability reaches P. Example: Top-P = 0.9 uses only the top 90% probability mass. Low Top-P: safer, more focused. High Top-P: more diverse, more creative.
 
 Most providers recommend using either Temperature or Top-P — not both aggressively.
 
 Common production settings:
-- Chat Applications: Temperature = 0.7, Top-P = 1.0
-- Coding: Temperature = 0.1, Top-P = 1.0
-- Creative Writing: Temperature = 1.0, Top-P = 1.0
 
-### Max Tokens
+Chat Applications — Temperature = 0.7, Top-P = 1.0
+Coding — Temperature = 0.1, Top-P = 1.0
+Creative Writing — Temperature = 1.0, Top-P = 1.0
+
+Max Tokens
 
 Controls maximum response length. If Max Tokens = 100, the model stops after approximately 100 generated tokens. Prevents excessive costs, runaway generations, and unnecessarily long outputs. Used heavily in AI agents, customer support bots, and RAG systems.
 
-### Stop Sequences
+Stop Sequences
 
 Custom stopping rules. When the model generates a stop sequence like "User:", generation halts. Useful for agents, structured outputs, and multi-turn conversations.
 
-### Frequency Penalty
+Frequency Penalty
 
-Reduces repetition. Without penalty: "Python is great. Python is great. Python is great." With penalty: the model avoids repeating identical words frequently.
+Reduces repetition. Without penalty the model repeats "Python is great." endlessly. With penalty it avoids repeating identical words frequently.
 
-### Presence Penalty
+Presence Penalty
 
-Encourages new topics. High presence penalty: model explores new ideas rather than repeating previous concepts. Useful for brainstorming and creative generation.
+Encourages new topics. High presence penalty makes the model explore new ideas rather than repeating previous concepts. Useful for brainstorming and creative generation.
 
-### Seed
+Seed
 
 Used for reproducibility. Generates identical outputs across multiple runs. Important for testing, evaluation, and benchmarks.
 
-### Context Window
+Context Window
 
 One of the most important concepts in LLM engineering. The maximum number of tokens a model can process at once. Everything — system prompt, user prompt, chat history, RAG context, tool results, generated response — must fit inside the context window.
 
@@ -534,38 +549,36 @@ Context sizes: Small (8K, 16K, 32K), Medium (128K, 200K), Large (1M+).
 
 Solutions when context is exceeded: summarization, context compression, RAG, memory systems.
 
-## 2. Streaming
+2. Streaming
 
 Streaming is how modern AI chat applications feel fast. Without streaming, the user waits for the entire response to be generated. With streaming, tokens are sent immediately as generated — "The capital of France is Paris" appears token-by-token instead of all at once.
 
-Benefits: Better user experience (immediate feedback), lower perceived latency (actual 5s response feels like 0.5s), better agent interactions (agents stream thoughts progressively — "Searching... Analyzing... Comparing results...").
+Benefits: Better user experience with immediate feedback, lower perceived latency (actual 5s feels like 0.5s), better agent interactions (agents stream thoughts progressively).
 
 Streaming challenges: partial responses need buffering, network connections can break, tool calls often pause streaming during execution.
 
-Streaming in agents: modern agents stream thoughts, tool results, and final responses progressively.
+3. Pricing
 
-## 3. Pricing
-
-Most providers charge per token. You pay for input tokens (everything sent to the model — system prompt, user message, chat history, RAG context) and output tokens (everything generated by the model — final response, agent reasoning).
+Most providers charge per token. You pay for input tokens (everything sent to the model — system prompt, user message, chat history, RAG context) and output tokens (everything generated — final response, agent reasoning).
 
 Total Cost = (Input Tokens × Input Rate) + (Output Tokens × Output Rate)
 
-Cached tokens: some providers offer discounts for repeated context (e.g., large system prompt sent repeatedly).
+Cached tokens offer discounts for repeated context. Hidden cost drivers: chat history grows with every message, RAG context adds documents, agent tool outputs loop back. A single agent request may invoke 4–10 model calls.
 
-Hidden cost drivers: chat history grows with every message, RAG context adds documents, agent tool outputs loop back into the model. A single agent request may invoke 4–10 model calls.
+Cost Optimization Techniques
 
-### Cost Optimization Techniques
-- Context Compression: reduce unnecessary text
-- Summarization: replace long conversations with summaries
-- Smart Chunking: retrieve only relevant documents
-- Model Routing: simple tasks use small/cheap models, complex tasks use large models
-- Caching: reuse previous results
+Context Compression — reduce unnecessary text
+Summarization — replace long conversations with summaries
+Smart Chunking — retrieve only relevant documents
+Model Routing — simple tasks use small models, complex tasks use large ones
+Caching — reuse previous results
 
-### Throughput Metrics
-- Tokens Per Second (TPS): how quickly a model generates text
-- Latency: time until first token appears
-- Time To First Token (TTFT): critical for streaming applications
-- Total Response Time: complete generation duration
+Throughput Metrics
+
+Tokens Per Second (TPS) — how quickly a model generates text
+Latency — time until first token appears
+Time To First Token (TTFT) — critical for streaming
+Total Response Time — complete generation duration
 
 Every AI engineer must understand Temperature, Top-P, Max Tokens, Stop Sequences, Context Window, Streaming, TTFT, Token Pricing, and Cost Optimization — these directly impact the quality, speed, scalability, and profitability of every AI application.`,
         project:
@@ -4246,18 +4259,313 @@ Retry with exponential backoff for transient failures`,
         label: "Memory Types",
         level: "intermediate",
         concept:
-          "Agents need memory to be useful across time. Short-term memory is the current context window — everything in the current conversation. Long-term memory persists across sessions — stored externally and retrieved when relevant. Episodic memory stores events (what happened when). Semantic memory stores facts and knowledge. Without memory, every conversation starts from zero — unusable for real assistants.",
+          "Memory is what separates a stateless chatbot from a true agent. Without it, every conversation starts from zero — the agent cannot build on past context, learn from previous tasks, or adapt to the user over time. With memory, the agent learns, remembers, and improves. Modern systems like ChatGPT Memory, Claude Projects, Devin, and Cursor all rely on memory architectures to maintain continuity across sessions and tasks.\n\nAgent memory mirrors human memory in structure. Short-term memory is the context window — fast, accurate, but finite and resets every session. Working memory holds the live state of the current task: the plan, intermediate results, and collected data that only matter while the agent is actively executing. Long-term memory persists across sessions in an external database or vector store, retrieved when relevant to the current task. Episodic memory stores experiences — not raw facts, but events: 'Last Tuesday the agent debugged a race condition in the auth service.' Semantic memory stores factual knowledge independent of when or how it was acquired: company policies, API documentation, user preferences. Procedural memory stores how-to knowledge: workflows, playbooks, and strategies the agent has learned to apply reliably.\n\nIn practice, agents compose multiple memory types simultaneously. A coding agent uses working memory to track the current plan, short-term memory to hold the last 20 messages, semantic memory to recall relevant API docs, and episodic memory to avoid repeating a failed approach it tried in a previous session. The memory lifecycle is continuous: receive input → retrieve relevant memories → reason → act → update memory. Every memory layer both reads and writes on every turn.",
+        deepDive: `Memory is what makes agents intelligent over time. A model without memory is stationary — it can never improve, personalize, or build on past work. Here are the eight memory types every agent engineer must understand.
+
+1. Short-Term Memory
+
+The most basic memory type. Stores the current conversation context inside the prompt.
+
+Architecture:
+
+User Input
+↓
+Context Window (messages list)
+↓
+LLM
+↓
+Response appended to context
+
+Everything in the messages array is short-term memory. The model can reference any prior turn directly.
+
+Example:
+User: "My name is Tisha."
+Later: "What's my name?" → "Tisha."
+
+Limitations:
+Context windows are finite — 128K, 200K, or 1M tokens.
+Once the window fills, old messages must be dropped or summarized.
+Resets entirely at the end of every session.
+
+Implementation:
+
+messages = [
+    {"role": "system", "content": system_prompt},
+    {"role": "user",   "content": "My name is Tisha"},
+    {"role": "assistant", "content": "Nice to meet you, Tisha."},
+    {"role": "user",   "content": "What's my name?"}
+]
+
+Manage context size:
+
+MAX_TOKENS = 100_000
+
+def trim_messages(messages: list, max_tokens: int) -> list:
+    while count_tokens(messages) > max_tokens:
+        messages.pop(1)  # remove oldest non-system message
+    return messages
+
+2. Working Memory
+
+The agent's scratch pad during a single task execution. Holds live state — the current plan, intermediate results, and collected data — that only matters while the task is running. Deleted when the task completes.
+
+Example — research agent working memory:
+
+working_memory = {
+    "task": "Research top 5 AI coding tools",
+    "plan": ["search", "scrape", "compare", "summarize"],
+    "current_step": "scrape",
+    "collected_sources": [...],
+    "partial_results": {...},
+    "notes": "GitHub Copilot has 1.5M users"
+}
+
+Human analogy: the numbers you hold in your head while doing mental arithmetic. Gone once you have the answer.
+
+Implementation pattern:
+
+class WorkingMemory:
+    def __init__(self):
+        self.state: dict = {}
+
+    def set(self, key: str, value):
+        self.state[key] = value
+
+    def get(self, key: str, default=None):
+        return self.state.get(key, default)
+
+    def clear(self):
+        self.state = {}
+
+3. Long-Term Memory
+
+Persists across sessions in an external database or vector store. The agent retrieves relevant long-term memories at the start of each conversation and injects them into the system prompt.
+
+Architecture:
+
+End of session
+↓
+Extract key facts from conversation
+↓
+Store in PostgreSQL / Redis / Vector DB
+↓
+New session starts
+↓
+Retrieve relevant memories by semantic search
+↓
+Inject into system prompt
+↓
+Agent has context from past sessions
+
+Storage options:
+PostgreSQL — structured facts (user preferences, settings)
+Redis — fast key/value (session state, recent activity)
+Vector DB — semantic retrieval (Qdrant, Pinecone, Chroma)
+
+Implementation:
+
+def save_memory(user_id: str, content: str, category: str):
+    embedding = embed(content)
+    db.execute(
+        "INSERT INTO memories (user_id, content, embedding, category, created_at) VALUES (%s, %s, %s, %s, NOW())",
+        [user_id, content, embedding, category]
+    )
+
+def retrieve_memory(user_id: str, query: str, top_k: int = 5) -> list[str]:
+    query_embedding = embed(query)
+    rows = db.execute(
+        "SELECT content FROM memories WHERE user_id = %s ORDER BY embedding <-> %s LIMIT %s",
+        [user_id, query_embedding, top_k]
+    )
+    return [row["content"] for row in rows]
+
+4. Episodic Memory
+
+Stores experiences — past events, decisions, and outcomes — not raw facts. The agent can recall what happened and apply that learning to future situations.
+
+Semantic memory: "OAuth 2.0 is an authorization protocol."
+Episodic memory: "On March 3rd, the OAuth token expired mid-task and caused a 401 loop. Fixed by checking token expiry before each API call."
+
+What gets stored:
+Past tasks and their outcomes
+Decisions made and why
+Failures and how they were resolved
+Sequences of actions that worked
+
+Implementation:
+
+@dataclass
+class Episode:
+    timestamp: datetime
+    task: str
+    actions: list[str]
+    outcome: str
+    lessons: str
+
+def store_episode(episode: Episode):
+    content = f"Task: {episode.task}\nOutcome: {episode.outcome}\nLesson: {episode.lessons}"
+    save_memory(user_id, content, category="episode")
+
+Before starting a new task, retrieve similar past episodes:
+
+similar_episodes = retrieve_memory(user_id, f"similar to: {current_task}", top_k=3)
+system_prompt += f"\n\nRelevant past experiences:\n" + "\n".join(similar_episodes)
+
+5. Semantic Memory
+
+Stores factual knowledge independent of experience — things the agent knows, not things the agent has done.
+
+Examples:
+Company: "Acme Corp uses PostgreSQL 15 on AWS RDS."
+User: "Prefers concise responses, no bullet points, uses Python 3.11."
+Domain: "The refund policy allows returns within 30 days."
+Technical: "The payments API rate limit is 100 req/min."
+
+Implementation with RAG:
+
+Document ingestion:
+Company handbook → chunk → embed → vector DB
+
+Retrieval at query time:
+User question → embed → similarity search → top-k chunks → inject into prompt
+
+Semantic memory answers: what does the agent know?
+Episodic memory answers: what has the agent experienced?
+
+Both are stored the same way (vector DB) but serve different reasoning purposes.
+
+6. Procedural Memory
+
+Stores how-to knowledge: workflows, strategies, and playbooks.
+
+Examples:
+"To debug a production incident: check logs first, then metrics, then traces."
+"To onboard a new customer: create CRM record → send welcome email → create billing subscription."
+"To review a PR: check for security issues, then performance, then style."
+
+Architecture:
+Often stored as: system prompt instructions, agent rules, named playbooks.
+
+PLAYBOOKS = {
+    "debug_incident": [
+        "Check application logs for errors in the last 30 minutes",
+        "Check metrics dashboard for anomalies",
+        "Check recent deployments for correlation",
+        "Create incident report"
+    ],
+    "customer_onboarding": [
+        "Create customer in CRM",
+        "Send welcome email",
+        "Create Stripe subscription",
+        "Open onboarding ticket in Jira"
+    ]
+}
+
+def get_playbook(task_type: str) -> list[str]:
+    return PLAYBOOKS.get(task_type, [])
+
+7. Shared Memory (Multi-Agent)
+
+When multiple agents collaborate, they share a common memory store.
+
+Agent A (researcher) stores:
+Market analysis results
+Source URLs
+Statistics
+
+Agent B (writer) reads the same store and uses the data.
+
+Architecture:
+
+Agent A → Write → Shared Memory Store ← Read → Agent B
+
+Implementation:
+
+class SharedMemory:
+    def __init__(self):
+        self._store = {}
+
+    def write(self, agent_id: str, key: str, value):
+        self._store[f"{key}"] = {"value": value, "written_by": agent_id}
+
+    def read(self, key: str):
+        return self._store.get(key, {}).get("value")
+
+Used in: LangGraph multi-agent graphs, CrewAI shared state, AutoGen group chats.
+
+8. Vector Memory
+
+The most common modern implementation of long-term, semantic, and episodic memory. Stores memories as embeddings in a vector database. Retrieval is semantic — the agent finds the most relevant memories for the current context regardless of exact wording.
+
+Memory
+↓
+text-embedding-3-small → [0.12, -0.55, 0.89, ...]
+↓
+Qdrant / Pinecone / Chroma
+↓
+At query time: embed query → cosine similarity search → top-k results
+
+Implementation with Qdrant:
+
+from qdrant_client import QdrantClient
+from qdrant_client.models import PointStruct
+
+client = QdrantClient(":memory:")
+
+def store_memory(memory_id: int, text: str, metadata: dict):
+    client.upsert("memories", points=[
+        PointStruct(id=memory_id, vector=embed(text), payload={"text": text, **metadata})
+    ])
+
+def recall(query: str, top_k: int = 5) -> list[str]:
+    results = client.search("memories", query_vector=embed(query), limit=top_k)
+    return [r.payload["text"] for r in results]
+
+Memory Hierarchy in Production
+
+Long-term memory (vector DB + PostgreSQL) — persists forever
+Semantic memory (RAG over documents) — persists forever
+Episodic memory (past experiences) — persists forever
+Working memory (task state dict) — deleted on task completion
+Short-term memory (context window messages) — resets each session
+
+The agent reads all layers before reasoning. It writes to long-term, episodic, and semantic memory at end-of-task.
+
+Memory Challenges
+
+Memory bloat — too many stored memories slow retrieval and increase costs.
+Solution: importance scoring + TTL. Only store memories above a relevance threshold; expire memories unused for 90 days.
+
+Memory drift — stored facts become outdated.
+Solution: recency weighting. Newer memories score higher than older ones during retrieval.
+
+Retrieval failure — the right memory exists but doesn't surface.
+Solution: hybrid search (dense vector + sparse BM25 keyword). Also store memories with rich metadata for filtering.
+
+Conflicting memories — two stored memories disagree.
+Solution: resolve by recency (newer wins) or confidence score. Flag conflicts for human review in high-stakes applications.`,
         keyPoints: [
-          "Short-term: the context window — fast, accurate, but resets every session",
-          "Long-term: external DB/vector store — survives session end, retrieved by relevance",
-          "Episodic: 'User asked about diamonds 3 weeks ago' — past events as narrative",
-          "Semantic: 'User prefers VS+ clarity, 0.9–1.1ct range' — distilled facts about user",
-          "Working memory: structured state the agent maintains within a single run",
+          "Short-term memory = the messages list / context window — fast and accurate, resets every session",
+          "Working memory = live task state dict (plan, partial results, notes) — exists only during execution, cleared on completion",
+          "Long-term memory = external PostgreSQL / Redis / vector DB — persists across sessions, retrieved by semantic search",
+          "Episodic memory = past experiences with outcomes and lessons — 'OAuth loop caused failure on March 3, fixed by pre-checking expiry'",
+          "Semantic memory = factual knowledge (user preferences, company policies, API docs) — the agent knows it, doesn't remember learning it",
+          "Procedural memory = how-to workflows and playbooks — stored as rules, instructions, or named procedure lists",
+          "Shared memory = multi-agent pattern — Agent A writes, Agent B reads from the same store (LangGraph state, CrewAI)",
+          "Vector memory = embed text → store in Qdrant/Pinecone/Chroma → semantic similarity search at retrieval time",
+          "Memory lifecycle: retrieve relevant memories → inject into prompt → agent reasons → act → store new memories",
+          "Memory bloat: importance scoring + TTL — only store above threshold, expire unused memories after 90 days",
+          "Memory drift: recency weighting — newer memories score higher than older ones during retrieval",
+          "Conflicting memories: resolve by recency (newer wins) or confidence score; flag high-stakes conflicts for human review",
         ],
         project:
-          "Build a memory-aware assistant: short-term = rolling window of last 20 messages, long-term = user facts stored in PostgreSQL. After each conversation, extract key facts (name, preferences, past requests) and store them. On new session start, retrieve relevant memories and inject into the system prompt.",
-        stack: ["PostgreSQL", "OpenAI API", "Python"],
-        resources: [],
+          "Build a memory-layered personal assistant with all four main memory types. Short-term: rolling window of last 20 messages, trimmed when context exceeds 80K tokens. Working memory: a WorkingMemory class with set/get/clear — the agent stores its current plan and intermediate results here during multi-step tasks. Long-term memory: after each conversation, extract 3–5 key facts using an LLM call ('Extract facts from this conversation as JSON: name, preferences, decisions, context'), store them in PostgreSQL with embeddings via pgvector. Episodic memory: after each completed task, store an Episode(task, actions, outcome, lesson) — retrieve the top 3 similar past episodes before starting any new multi-step task. Test with 5 consecutive sessions where each session builds on context from the previous: session 1 (user introduces themselves and states preferences), session 2 (agent recalls preferences without being told again), session 3 (user asks for help with a task that failed similarly before), session 4 (agent recalls the episode and avoids the previous failure), session 5 (ask the agent to describe everything it remembers about the user — verify all four layers contributed).",
+        stack: ["PostgreSQL", "pgvector", "Qdrant", "OpenAI Embeddings", "Python"],
+        resources: [
+          { title: "mem0 — Memory Layer for AI Agents", url: "https://docs.mem0.ai/" },
+          { title: "pgvector — Vector Search in PostgreSQL", url: "https://github.com/pgvector/pgvector" },
+          { title: "Qdrant Documentation", url: "https://qdrant.tech/documentation/" },
+        ],
       },
       {
         id: "memory-systems",
@@ -4265,19 +4573,319 @@ Retry with exponential backoff for transient failures`,
         label: "Memory Systems",
         level: "intermediate",
         concept:
-          "A complete memory system has multiple layers: user profiles (persistent facts about each user), conversation history (full message log in DB), session memory (within-session working state), and persistent memory (extracted facts that survive indefinitely). The mem0 library provides a managed memory layer for agents. The challenge is retrieval: finding the right memories at the right time.",
+          "A memory system is the infrastructure that lets an agent store, organize, retrieve, and update information over time. Without one, every conversation starts from zero — the agent forgets everything the moment a session ends. With a full memory system, the agent remembers user preferences, learns from past tasks, reuses knowledge across sessions, and improves its decisions over time. This is what separates a stateful agent from a stateless chatbot.\n\nA complete memory system combines multiple storage backends, each suited to a different kind of information. Context window memory holds the current conversation directly in the prompt — simple and accurate, but finite and temporary. Vector memory stores embeddings in a database like Qdrant or Pinecone, enabling semantic retrieval across thousands of past memories. Relational database memory (PostgreSQL, SQLite) handles structured facts — user profiles, preferences, project metadata. Graph memory stores relationships between entities, enabling multi-hop reasoning: user → works at → company → uses → product. Most production agents layer all four.\n\nThe hardest problem in memory system design is retrieval: finding the right memory at the right time. The standard approach is hybrid retrieval — combine semantic similarity search (dense vector) with recency weighting and importance scoring. mem0 is the most widely adopted managed memory library for agents — it handles storage, embedding, retrieval, deduplication, and conflict resolution with a single API. For custom systems, the pattern is always: retrieve relevant memories before the LLM call, inject them into the system prompt, and update memory after the agent responds.",
+        deepDive: `A memory system has five components: storage, manager, retrieval, ranking, and updating. Each plays a specific role.
+
+Memory System Architecture
+
+User Input
+↓
+Memory Manager
+↓
+Memory Retrieval (reads from storage)
+↓
+Agent Reasoning (LLM + injected memories)
+↓
+Tool Usage
+↓
+Memory Update (writes to storage)
+↓
+Storage
+
+Memory is both read and written on every turn.
+
+1. Context Window Memory
+
+The simplest memory system — store the conversation in the messages list.
+
+messages = [
+    {"role": "system",    "content": system_prompt},
+    {"role": "user",      "content": "My name is Tisha"},
+    {"role": "assistant", "content": "Nice to meet you, Tisha."},
+    {"role": "user",      "content": "What's my name?"}
+]
+
+Advantages: zero setup, perfectly accurate within a session.
+Limitations: finite window, resets on session end, expensive at scale.
+
+Manage context size by trimming when it exceeds a threshold:
+
+def trim_to_limit(messages: list, max_tokens: int) -> list:
+    while count_tokens(messages) > max_tokens:
+        messages.pop(1)  # remove oldest non-system message
+    return messages
+
+2. Vector Memory System
+
+The most common architecture for long-term agent memory. Each memory is embedded and stored as a vector. Retrieval is semantic — the agent finds relevant memories regardless of exact wording.
+
+Storage:
+Memory text → embedding model → vector + metadata → vector DB (Qdrant, Pinecone, Chroma)
+
+Retrieval:
+Current context → embed → cosine similarity search → top-k results → inject into prompt
+
+Implementation with Qdrant:
+
+from qdrant_client import QdrantClient
+from qdrant_client.models import PointStruct, Distance, VectorParams
+
+client = QdrantClient(url="http://localhost:6333")
+client.create_collection("agent_memory", vectors_config=VectorParams(size=1536, distance=Distance.COSINE))
+
+def store(memory_id: int, text: str, user_id: str, category: str):
+    client.upsert("agent_memory", points=[
+        PointStruct(
+            id=memory_id,
+            vector=embed(text),
+            payload={"text": text, "user_id": user_id, "category": category, "ts": time.time()}
+        )
+    ])
+
+def retrieve(query: str, user_id: str, top_k: int = 5) -> list[str]:
+    results = client.search(
+        "agent_memory",
+        query_vector=embed(query),
+        query_filter={"must": [{"key": "user_id", "match": {"value": user_id}}]},
+        limit=top_k
+    )
+    return [r.payload["text"] for r in results]
+
+3. Relational Database Memory
+
+Structured facts and user profiles stored in PostgreSQL or SQLite. Best for queryable, structured data — not semantic search.
+
+Schema:
+
+CREATE TABLE user_memory (
+    id          SERIAL PRIMARY KEY,
+    user_id     TEXT NOT NULL,
+    category    TEXT NOT NULL,   -- 'preference', 'fact', 'project', 'episode'
+    content     TEXT NOT NULL,
+    created_at  TIMESTAMPTZ DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ DEFAULT NOW(),
+    importance  FLOAT DEFAULT 1.0
+);
+
+CREATE INDEX ON user_memory (user_id, category);
+
+Operations:
+
+def save_fact(user_id: str, category: str, content: str, importance: float = 1.0):
+    db.execute(
+        "INSERT INTO user_memory (user_id, category, content, importance) VALUES (%s, %s, %s, %s)",
+        [user_id, category, content, importance]
+    )
+
+def get_facts(user_id: str, category: str) -> list[str]:
+    rows = db.execute(
+        "SELECT content FROM user_memory WHERE user_id = %s AND category = %s ORDER BY updated_at DESC",
+        [user_id, category]
+    )
+    return [r["content"] for r in rows]
+
+Best for: user profiles, explicit preferences, project history, structured agent metadata.
+
+4. Graph Memory System
+
+Stores entities and relationships. Enables multi-hop reasoning that flat vector search cannot do.
+
+Structure:
+Nodes: User, Company, Project, Technology
+Edges: works_at, uses, owns, depends_on
+
+Example:
+(Tisha) --works_at--> (Acme Corp) --uses--> (PostgreSQL)
+
+Query: "What database does Tisha's company use?"
+Graph traversal: Tisha → works_at → Acme Corp → uses → PostgreSQL
+
+Libraries: Neo4j, NetworkX (local), or LLM-extracted JSON graphs.
+Used in: enterprise knowledge agents, Graph RAG, research systems with complex entity relationships.
+
+Memory Retrieval Strategies
+
+Similarity-based (most common)
+Embed the current query → cosine search → top-k memories
+Best for: semantic retrieval across large memory stores
+
+Recency-based
+Sort by timestamp DESC → take most recent N
+Best for: conversation continuity, "what did we discuss last time?"
+
+Importance-based
+Each memory has an importance score
+High-importance memories (user's name, key preferences) surface first regardless of recency
+Assign importance at storage time; increment when memory is repeatedly confirmed
+
+Hybrid (production standard)
+Combine all three with a weighted score:
+
+def hybrid_score(similarity: float, recency_days: float, importance: float) -> float:
+    recency_score = 1 / (1 + recency_days * 0.1)
+    return (0.5 * similarity) + (0.3 * recency_score) + (0.2 * importance)
+
+Re-rank candidates by hybrid_score and take top-k.
+
+Memory Manager — the Central Controller
+
+The memory manager orchestrates all operations. Every agent interaction passes through it.
+
+class MemoryManager:
+    def __init__(self, user_id: str, vector_store, relational_db):
+        self.user_id = user_id
+        self.vector = vector_store
+        self.db = relational_db
+
+    def before_turn(self, query: str) -> str:
+        """Retrieve relevant memories and format for injection."""
+        facts = self.db.get_facts(self.user_id, "preference")
+        semantic = self.vector.retrieve(query, self.user_id, top_k=5)
+        memories = facts + semantic
+        if not memories:
+            return ""
+        return "Relevant context:\n" + "\n".join(f"- {m}" for m in memories)
+
+    def after_turn(self, conversation: list):
+        """Extract and store new facts from the completed conversation."""
+        new_facts = extract_facts_llm(conversation)  # LLM call to extract key facts
+        for fact in new_facts:
+            self.db.save_fact(self.user_id, fact["category"], fact["content"], fact["importance"])
+            self.vector.store(new_id(), fact["content"], self.user_id, fact["category"])
+
+Inject retrieved memories into the system prompt:
+
+memories = memory_manager.before_turn(user_query)
+system_prompt = base_system_prompt
+if memories:
+    system_prompt += f"\n\n{memories}"
+
+5. mem0 — Managed Memory Layer
+
+mem0 is the most widely used memory library for agents. It handles storage, embedding, deduplication, conflict resolution, and retrieval behind a simple API.
+
+pip install mem0ai
+
+from mem0 import Memory
+
+m = Memory()
+
+# Store a memory
+m.add("The user prefers Python over JavaScript", user_id="tisha")
+
+# Retrieve relevant memories
+results = m.search("programming language preference", user_id="tisha")
+for r in results:
+    print(r["memory"])
+
+# Update a memory
+m.update(memory_id, "The user now prefers Rust over Python")
+
+# Get all memories for a user
+all_memories = m.get_all(user_id="tisha")
+
+mem0 handles:
+Vector storage (uses Qdrant or Chroma under the hood)
+Deduplication (avoids storing the same fact twice)
+Conflict resolution (new contradicting fact replaces old)
+Versioning (keeps history of changed memories)
+
+Memory Consolidation
+
+As memories grow, retrieval degrades. Consolidation keeps the system efficient.
+
+Summarization — replace a batch of episodic memories with a single summary:
+
+def consolidate_episodes(episodes: list[str]) -> str:
+    prompt = f"Summarize these experiences into key lessons:\n" + "\n".join(episodes)
+    return llm_call(prompt)
+
+Importance scoring — filter out low-value memories before they accumulate:
+
+def worth_storing(memory: str, context: str) -> bool:
+    score = llm_score(f"How important is this to remember? '{memory}' (0-10)")
+    return score >= 6
+
+TTL-based expiry — expire memories unused for N days:
+
+DELETE FROM user_memory WHERE updated_at < NOW() - INTERVAL '90 days' AND importance < 0.5
+
+Reflection-based consolidation — advanced agents periodically reflect on their experiences:
+
+Task completed
+↓
+LLM reflection: "What did I learn? What would I do differently?"
+↓
+Store lesson as a high-importance semantic memory
+
+Multi-Agent Shared Memory
+
+When agents collaborate, they share a common memory store.
+
+Agent A (Researcher) → stores findings → Shared Memory Store
+Agent B (Writer)     → reads findings → Shared Memory Store
+Agent C (Reviewer)   → reads draft + findings → Shared Memory Store
+
+Implementation:
+
+class SharedMemory:
+    def __init__(self):
+        self._store: dict = {}
+        self._lock = asyncio.Lock()
+
+    async def write(self, key: str, value, agent_id: str):
+        async with self._lock:
+            self._store[key] = {"value": value, "by": agent_id, "ts": time.time()}
+
+    async def read(self, key: str):
+        return self._store.get(key, {}).get("value")
+
+Used in: LangGraph state (the graph's shared state dict), CrewAI shared context, AutoGen group chat history.
+
+Memory System Design Patterns
+
+Memory Layer Pattern — stack memory types in order of persistence:
+Short-term (context window) → Working (task state) → Long-term (vector + DB)
+
+Retrieval-Augmented Memory — retrieve before every LLM call:
+Question → Memory Retrieval → Context Injection → LLM → Response → Memory Update
+
+Reflection Pattern — learn from every task:
+Action → Result → LLM Reflection → Store Lesson
+
+Shared Memory Pattern — multi-agent coordination:
+All agents read from and write to one shared store with locking
+
+Memory Evaluation Metrics
+
+Recall — did retrieval find the relevant memory?
+Precision — were retrieved memories actually useful (low noise)?
+Latency — how fast was retrieval? (target: < 100ms)
+Storage cost — bytes per memory; grows with user base
+Freshness — are retrieved memories up to date?
+
+Test memory quality by running 20 queries where you know which memories should surface, measure hit rate, and track false positives.`,
         keyPoints: [
-          "User profile: {name, preferences, past_purchases, communication_style} — updated after each session",
-          "Conversation history: full message log in PostgreSQL — enables user to continue where they left off",
-          "Session memory: in-memory dict during a run — agent's scratch pad",
-          "mem0: managed memory library — pip install mem0ai — handles storage + retrieval",
-          "Memory key: hash(user_id + topic) — look up specific memories efficiently",
+          "Memory system = store + manager + retrieval + ranking + updating — all five components required for production",
+          "Context window memory: messages list in the prompt — zero setup, accurate within session, resets on end",
+          "Vector memory: text → embed → Qdrant/Pinecone/Chroma → semantic similarity search — standard for long-term memory",
+          "Relational DB memory: PostgreSQL with user_memory table — structured facts, preferences, project history",
+          "Graph memory: nodes + edges (works_at, uses, depends_on) — multi-hop reasoning, enterprise knowledge bases",
+          "Hybrid retrieval: 0.5 × similarity + 0.3 × recency + 0.2 × importance — production-standard ranking",
+          "MemoryManager: before_turn() retrieves + injects; after_turn() extracts facts via LLM and stores them",
+          "mem0: pip install mem0ai — managed memory with deduplication, conflict resolution, versioning built in",
+          "Consolidation: summarize old episodes, importance-score new ones (store ≥ 6/10), TTL-expire unused memories",
+          "Reflection pattern: after each task, LLM reflects on lessons → stored as high-importance semantic memory",
+          "Shared memory: asyncio.Lock() protected dict — LangGraph state, CrewAI context, AutoGen group history",
+          "Evaluation: recall (right memory found), precision (low noise), latency (< 100ms), freshness (not stale)",
         ],
         project:
-          "Build a full memory system using mem0: user facts extracted and stored after each conversation, semantic search to retrieve relevant past interactions, conversation history persisted in PostgreSQL. Test that the agent remembers preferences across 5 different sessions.",
-        stack: ["mem0", "PostgreSQL", "OpenAI Embeddings"],
+          "Build a complete four-layer memory system from scratch. Layer 1 — context window with trim_to_limit() that drops oldest non-system messages when token count exceeds 80K. Layer 2 — relational memory: PostgreSQL user_memory table (user_id, category, content, importance, created_at, updated_at); save_fact() and get_facts() functions. Layer 3 — vector memory: Qdrant collection with store() and retrieve() functions using OpenAI text-embedding-3-small; filter by user_id metadata. Layer 4 — MemoryManager class with before_turn(query) → returns formatted memory string for system prompt injection, and after_turn(conversation) → calls an LLM to extract structured facts (category, content, importance 0-1) and stores them in both PostgreSQL and Qdrant. Test the full system across 6 sessions: session 1 (user shares name, job, tech preferences), session 2 (agent recalls all three without being told), session 3 (user starts a project — agent stores project context), session 4 (user references the project by implication — agent retrieves context correctly), session 5 (user changes a preference — agent updates the fact and uses the new one), session 6 (ask agent to summarize everything it knows about the user — verify all layers contributed). Finally, measure retrieval latency and confirm it stays under 150ms.",
+        stack: ["mem0", "PostgreSQL", "Qdrant", "OpenAI Embeddings", "Python", "asyncio"],
         resources: [
-          { title: "mem0 Docs", url: "https://docs.mem0.ai/" },
+          { title: "mem0 Documentation", url: "https://docs.mem0.ai/" },
+          { title: "Qdrant Documentation", url: "https://qdrant.tech/documentation/" },
+          { title: "pgvector — Vector Search in PostgreSQL", url: "https://github.com/pgvector/pgvector" },
         ],
       },
       {
@@ -4286,18 +4894,291 @@ Retry with exponential backoff for transient failures`,
         label: "Memory Maintenance",
         level: "advanced",
         concept:
-          "Memory without maintenance becomes bloated and contradictory. Summarization compresses old conversation turns into dense summaries to free context space. Compression extracts only the signal — remove filler, duplicates, and irrelevant information. Memory aging reduces the weight of older memories over time. Retrieval — finding the right memory for the current context — requires semantic search with a vector store.",
+          "Building a memory system is only half the job. Without active maintenance, memory degrades: it bloats with low-value entries, drifts as facts become outdated, accumulates duplicates that slow retrieval, and fills with contradictions that corrupt reasoning. A coding agent that has run for months can accumulate tens of thousands of memories — without maintenance, retrieval latency climbs, costs rise, and the agent starts returning stale or wrong context.\n\nMemory maintenance is the set of processes that keep memory accurate, relevant, and efficient over time. The core operations are: summarization (compress long conversations into dense summaries), deduplication (collapse semantically equivalent memories into one), updating (replace outdated facts when new contradicting information arrives), pruning (delete low-importance, expired, or unused memories), archiving (move historical memories to cold storage instead of deleting them), and reflection (extract lessons from completed tasks and store them as high-importance memories). Each operation runs either continuously after every turn or on a scheduled background job.\n\nImportance scoring is the foundation everything else builds on. Every stored memory receives a score from 0 to 1 at storage time — a passing weather query scores 0.1, a confirmed user preference scores 0.9. Importance gates pruning (remove if score < 0.3 and last accessed > 30 days ago), controls TTL length (high-importance memories never expire), and ranks retrieval candidates when the context window can only fit a limited number of injected memories. Without importance scoring, all memories look equal and maintenance has no basis for any decision.",
+        deepDive: `Memory maintenance keeps the system fast, accurate, and cheap as it scales. Here are the eight core operations.
+
+Memory Lifecycle
+
+Create → Store → Retrieve → Update → Archive → Delete
+
+Every memory passes through this lifecycle. Maintenance manages every transition.
+
+1. Importance Scoring
+
+The foundation of all maintenance decisions. Assign a score to every memory at storage time.
+
+def score_memory(content: str, category: str) -> float:
+    scores = {
+        "core_preference": 0.95,   # "user prefers Python over JS"
+        "project_context": 0.85,   # "working on AI agent for fintech"
+        "decision":        0.75,   # "chose PostgreSQL over MongoDB"
+        "episode":         0.60,   # past task experience
+        "fact":            0.50,   # general knowledge
+        "conversation":    0.30,   # casual exchange
+        "transient":       0.10,   # "asked about today's weather"
+    }
+    base = scores.get(category, 0.40)
+    # boost if the content is explicitly confirmed ("I always...", "I definitely...")
+    if any(w in content.lower() for w in ["always", "prefer", "never", "definitely"]):
+        base = min(1.0, base + 0.15)
+    return base
+
+Importance is used by every downstream operation: pruning threshold, TTL length, retrieval ranking weight.
+
+2. Context Window Summarization
+
+When the conversation history grows beyond the context budget, summarize the oldest turns.
+
+Trigger: token count > 80% of context limit
+Action: summarize the oldest 50% of messages into a single compressed summary
+
+def summarize_old_turns(messages: list, keep_last_n: int = 10) -> list:
+    if len(messages) <= keep_last_n + 1:  # +1 for system prompt
+        return messages
+
+    system = messages[0]
+    old_turns = messages[1:-keep_last_n]
+    recent_turns = messages[-keep_last_n:]
+
+    conversation_text = "\n".join(
+        f"{m['role'].upper()}: {m['content']}" for m in old_turns
+    )
+    summary = llm_call(
+        f"Summarize this conversation, preserving all key facts, decisions, and user preferences:\n\n{conversation_text}"
+    )
+    summary_message = {"role": "system", "content": f"[Earlier conversation summary]: {summary}"}
+    return [system, summary_message] + recent_turns
+
+This keeps the context window manageable while preserving the signal from earlier turns.
+
+3. Fact Extraction
+
+After every conversation, extract durable facts and store them as long-term memories.
+
+def extract_facts(conversation: list) -> list[dict]:
+    messages_text = "\n".join(f"{m['role']}: {m['content']}" for m in conversation)
+    response = llm_call(f"""
+Extract key facts from this conversation as JSON. Only include information worth remembering long-term.
+Return a list of objects with: category, content, importance (0.0-1.0).
+
+Categories: core_preference, project_context, decision, episode, fact
+
+Conversation:
+{messages_text}
+
+Return JSON only.""")
+    return json.loads(response)
+
+Example output:
+[
+  {"category": "core_preference", "content": "User prefers Rust over Python for systems work", "importance": 0.9},
+  {"category": "project_context", "content": "Building a distributed KV store as a side project", "importance": 0.8},
+  {"category": "decision", "content": "Chose async Rust (tokio) over sync for the networking layer", "importance": 0.7}
+]
+
+Store each extracted fact in both PostgreSQL and the vector DB.
+
+4. Deduplication
+
+Duplicate memories waste storage and inject redundant context. Remove semantic duplicates before storing new facts.
+
+def is_duplicate(new_content: str, existing_memories: list[str], threshold: float = 0.92) -> bool:
+    new_embedding = embed(new_content)
+    for existing in existing_memories:
+        similarity = cosine_similarity(new_embedding, embed(existing))
+        if similarity > threshold:
+            return True
+    return False
+
+def store_if_unique(user_id: str, content: str, category: str, importance: float):
+    recent = get_recent_memories(user_id, limit=200)
+    if not is_duplicate(content, recent):
+        save_memory(user_id, content, category, importance)
+
+mem0 handles this automatically. If you build your own system, run deduplication before every write.
+
+5. Conflict Resolution
+
+When new information contradicts a stored memory, one must win.
+
+Example:
+Stored: "User prefers Python"
+New:    "User now prefers Rust"
+
+Resolution strategies:
+Recency wins (default) — newer information replaces older
+Confidence wins — the more explicit/confirmed statement wins
+Version history — keep both, mark old as superseded
+
+def resolve_conflict(user_id: str, new_content: str, new_importance: float):
+    conflicting = find_conflicting_memory(user_id, new_content)
+    if conflicting:
+        if new_importance >= conflicting["importance"]:
+            # supersede the old memory
+            archive_memory(conflicting["id"], reason="superseded")
+            save_memory(user_id, new_content, conflicting["category"], new_importance)
+        else:
+            # old memory wins — store new as low-confidence note
+            save_memory(user_id, f"[Unconfirmed update]: {new_content}", "fact", 0.3)
+    else:
+        save_memory(user_id, new_content, "fact", new_importance)
+
+Conflict detection uses embedding similarity — if new content is > 0.80 similar to an existing memory and the content contradicts it, flag it.
+
+6. Memory Pruning
+
+Regularly delete memories that are no longer worth keeping.
+
+Pruning criteria:
+Low importance score (< 0.3) AND last accessed > 30 days ago
+Expired TTL (transient memories: 7 days, conversation memories: 90 days)
+Superseded by a newer, conflicting memory (archived, not deleted immediately)
+Marked as incorrect by the agent during reflection
+
+def prune_memories(user_id: str):
+    # Delete low-importance, stale memories
+    db.execute("""
+        DELETE FROM user_memory
+        WHERE user_id = %s
+          AND importance < 0.3
+          AND last_accessed_at < NOW() - INTERVAL '30 days'
+    """, [user_id])
+
+    # Delete expired transient memories
+    db.execute("""
+        DELETE FROM user_memory
+        WHERE user_id = %s
+          AND category = 'transient'
+          AND created_at < NOW() - INTERVAL '7 days'
+    """, [user_id])
+
+Run as a background job — daily for active users, weekly for inactive.
+
+7. Memory Archiving
+
+Valuable old memories should be archived, not deleted. They may be needed for auditing, compliance, or historical analysis.
+
+def archive_memory(memory_id: int, reason: str):
+    db.execute("""
+        INSERT INTO memory_archive (memory_id, user_id, content, category, importance, archived_at, reason)
+        SELECT id, user_id, content, category, importance, NOW(), %s
+        FROM user_memory WHERE id = %s
+    """, [reason, memory_id])
+    db.execute("DELETE FROM user_memory WHERE id = %s", [memory_id])
+
+Active memory (user_memory table) — hot, searched on every query
+Archive (memory_archive table) — cold, queried only when explicitly needed
+
+For vector DBs, move archived vectors to a separate low-cost collection.
+
+8. Reflection-Based Memory
+
+After completing a task, the agent reflects and stores lessons as high-importance memories.
+
+def reflect_on_task(task: str, actions: list[str], outcome: str, user_id: str):
+    reflection_prompt = f"""
+Task: {task}
+Actions taken: {chr(10).join(actions)}
+Outcome: {outcome}
+
+In 2-3 sentences: what went well, what failed, and what should I do differently next time?
+Be specific and actionable.
+"""
+    lesson = llm_call(reflection_prompt)
+    save_memory(
+        user_id,
+        content=f"[Lesson from task '{task}']: {lesson}",
+        category="episode",
+        importance=0.75
+    )
+
+Before starting a similar new task, retrieve past lessons:
+
+past_lessons = retrieve_memory(user_id, f"lessons from tasks similar to: {current_task}", top_k=3)
+
+9. Retrieval Optimization
+
+Maintenance also improves retrieval quality over time.
+
+Re-embedding — when a better embedding model is released, re-embed all stored memories:
+
+def reembed_all(user_id: str):
+    memories = get_all_memories(user_id)
+    for m in memories:
+        new_embedding = embed_v2(m["content"])  # new model
+        update_vector(m["id"], new_embedding)
+
+Metadata indexing — tag memories with searchable metadata at storage time for faster filtering:
+
+payload = {
+    "text": content,
+    "user_id": user_id,
+    "category": category,
+    "importance": importance,
+    "project": current_project,  # filter by project
+    "tags": extract_tags(content)  # ["python", "authentication", "agent"]
+}
+
+Access tracking — record last_accessed_at on every retrieval hit (used by pruning):
+
+def retrieve_and_track(user_id: str, query: str) -> list[str]:
+    results = vector_search(user_id, query)
+    ids = [r.id for r in results]
+    db.execute("UPDATE user_memory SET last_accessed_at = NOW() WHERE id = ANY(%s)", [ids])
+    return [r.payload["text"] for r in results]
+
+Scheduled Maintenance Jobs
+
+Run as async background tasks — never block the agent loop.
+
+Daily jobs:
+Fact extraction from yesterday's conversations
+Deduplication pass over new memories
+Prune expired transient memories
+
+Weekly jobs:
+Prune low-importance stale memories
+Consolidate similar episodic memories into summaries
+Refresh re-fetchable facts (e.g., company policy documents)
+
+On-task:
+Context window summarization (triggered by token threshold)
+Conflict resolution (triggered on every write)
+Reflection (triggered on task completion)
+
+Memory Health Metrics
+
+Track these to know if your system is healthy:
+
+Recall — what % of relevant memories surface in top-5 retrieval?
+Precision — what % of retrieved memories are actually useful?
+Deduplication rate — what % of writes were rejected as duplicates?
+Staleness — average age of memories being retrieved (high = drift problem)
+Pruning rate — memories deleted per day (too high = storing junk)
+Storage growth — GB/month per user (should plateau, not grow linearly)
+
+Test recall and precision by running 50 queries where you know the correct answer and measuring hit rate.`,
         keyPoints: [
-          "Progressive summarization: summarize old turns when context > 80% full",
-          "Memory extraction: 'From this conversation, extract the key facts as JSON'",
-          "Memory contradiction: new fact conflicts with old — resolve by recency or confidence",
-          "Semantic retrieval: embed query → vector search memories → inject top-k matches",
-          "Memory aging: TTL on memories + importance score — decay less-used facts",
+          "Importance score (0-1) at storage time: core_preference=0.95, project_context=0.85, transient=0.10 — gates all downstream decisions",
+          "Context window summarization: when tokens > 80% of limit, summarize oldest 50% of turns into one compressed message",
+          "Fact extraction: after every conversation, LLM call extracts {category, content, importance} JSON → stored in both PostgreSQL and vector DB",
+          "Deduplication: cosine similarity > 0.92 against recent memories → skip write; mem0 handles this automatically",
+          "Conflict resolution: new memory contradicts old → recency wins by default; archive superseded memory, don't delete it",
+          "Pruning: DELETE WHERE importance < 0.3 AND last_accessed_at < 30 days ago; expire transient memories after 7 days",
+          "Archiving: move old/superseded memories to memory_archive table instead of deleting — audit trail + recovery",
+          "Reflection: after task completion, LLM reflects on outcome → store lesson as importance=0.75 episode memory",
+          "Re-embedding: when a better model releases, regenerate all stored vectors — retrieval quality improves immediately",
+          "Access tracking: update last_accessed_at on every retrieval hit — feeds pruning, importance decay, and health metrics",
+          "Scheduled jobs: daily (fact extract + dedup + prune transient), weekly (prune stale + consolidate episodes + refresh facts)",
+          "Health metrics: recall %, precision %, deduplication rate, staleness, pruning rate, storage growth — measure all six",
         ],
         project:
-          "Implement a memory compressor: when conversation history exceeds 10k tokens, summarize the oldest 50% into a 500-token summary. Extract structured facts from each conversation. Detect and resolve contradictions (user says their budget changed). Run the system over 20 simulated conversations.",
-        stack: ["OpenAI API", "pgvector", "Python"],
-        resources: [],
+          "Build a complete memory maintenance pipeline on top of the memory system from the previous project. Implement all eight operations: (1) Importance scorer — assign_importance(content, category) returns float 0-1 using the category table plus keyword boosters. (2) Context summarizer — summarize_old_turns(messages) triggers when token count > 80K, summarizes oldest 50% and returns trimmed messages list. (3) Fact extractor — extract_facts(conversation) LLM call after each session, returns JSON list, stores to both PostgreSQL and Qdrant. (4) Deduplicator — before every write, embed the new content, check cosine similarity against the user's last 200 memories, skip if > 0.92 similar. (5) Conflict resolver — find_conflicting_memory() + resolve_conflict() that archives the old memory and stores the new one when importance >= old. (6) Pruner — prune_memories() SQL that deletes low-importance stale entries and expired transients, runs as a scheduled async job. (7) Archiver — archive_memory() moves to memory_archive table with reason field. (8) Reflector — reflect_on_task() runs after each multi-step task and stores a lesson as an episode. Run 20 simulated sessions with varied inputs: some changing preferences (triggers conflict resolution), some with duplicates (triggers deduplication), some completing tasks (triggers reflection). After all 20 sessions, measure recall on 10 test queries, report deduplication rate, and confirm the memory table size stayed flat after week 3 due to pruning.",
+        stack: ["PostgreSQL", "Qdrant", "OpenAI API", "OpenAI Embeddings", "asyncio", "Python"],
+        resources: [
+          { title: "mem0 Documentation", url: "https://docs.mem0.ai/" },
+          { title: "pgvector", url: "https://github.com/pgvector/pgvector" },
+        ],
       },
     ],
   },
@@ -4315,18 +5196,394 @@ Retry with exponential backoff for transient failures`,
         label: "Embeddings, Chunking & Indexing",
         level: "intermediate",
         concept:
-          "RAG converts your private documents into LLM knowledge without fine-tuning. The pipeline: chunk documents into pieces, embed each chunk into a vector, store in a vector database. At query time: embed the query, find the nearest chunks by cosine similarity, inject them into the LLM prompt. Chunking strategy and embedding model choice determine retrieval quality more than anything else.",
+          "Most beginners think RAG is: question → vector database → answer. In reality, a RAG system succeeds or fails based on three components that happen before any query is ever made: embeddings, chunking, and indexing. These form the ingestion pipeline — and a large percentage of production RAG failures trace back to mistakes here, not to the LLM or retrieval logic.\n\nEmbeddings convert text into dense numerical vectors that capture semantic meaning. Similar concepts cluster near each other in vector space — 'how do I train an LLM?' and 'large language model training guide' land near each other even with zero word overlap, while 'quarterly revenue report' lands far away. The embedding model you choose determines the quality of this mapping. OpenAI's text-embedding-3-small is fast and cheap; text-embedding-3-large is more accurate for complex domains. Open-source options (BGE, E5, Instructor) are strong for self-hosted systems. The critical rule: never mix embedding models — a query embedded with model A cannot be compared against documents embedded with model B.\n\nChunking is how you split large documents into pieces small enough to embed usefully. Embedding a 500-page PDF as one giant vector produces one nearly useless embedding. Chunk too small and you lose context; chunk too large and retrieval precision drops. Recursive chunking (LangChain's RecursiveCharacterTextSplitter) is the production default — it splits on paragraph, then sentence, then word boundaries, respecting natural structure. Always add overlap (100–200 tokens) so information at chunk boundaries isn't lost. Always attach metadata to every chunk (document name, page number, section, timestamp) — metadata enables filtered retrieval and source citations. Indexing then organizes the stored embeddings so similarity search runs in milliseconds across millions of vectors, using HNSW for most workloads and hybrid (vector + BM25 keyword) search when exact-term recall matters.",
+        deepDive: `The ingestion pipeline runs once. The retrieval pipeline runs on every query. Getting ingestion right determines everything downstream.
+
+Full RAG Pipeline
+
+Ingestion (runs once):
+Documents → Text Extraction → Cleaning → Chunking → Metadata → Embedding → Indexing → Vector DB
+
+Retrieval (runs on every query):
+User Question → Query Embedding → Similarity Search → Top-K Chunks → LLM Prompt → Answer
+
+PART 1: EMBEDDINGS
+
+What is an Embedding?
+
+Text is converted into a fixed-size vector of floating point numbers.
+
+"Python is a programming language" → [0.12, -0.84, 0.44, 0.21, ...]
+
+The vector has hundreds or thousands of dimensions. The position in that space encodes meaning. Similar texts produce similar vectors — close in space. Dissimilar texts produce distant vectors.
+
+Semantic Space
+
+Animal cluster:
+Dog, Cat, Tiger, Lion → nearby vectors
+
+Programming cluster:
+Python, Java, Rust, C++ → nearby vectors
+
+Finance cluster:
+Revenue, EBITDA, Balance Sheet → nearby vectors
+
+Similarity search works because this spatial structure is meaningful.
+
+Embedding Models
+
+OpenAI (hosted):
+text-embedding-3-small — 1536 dims, fast, cheap ($0.02/1M tokens) — best default
+text-embedding-3-large — 3072 dims, more accurate, 5x cost — use for high-stakes retrieval
+text-embedding-ada-002  — legacy, 1536 dims, slightly weaker — avoid for new projects
+
+Open source (self-hosted):
+BGE-large-en-v1.5  — 1024 dims, top open-source performance, runs on CPU
+E5-large-v2        — 1024 dims, strong on retrieval benchmarks
+Instructor-xl      — 768 dims, task-specific instructions improve domain retrieval
+Sentence Transformers — many variants, easy to run locally
+
+Choosing an embedding model:
+General documents (docs, wikis, support):   text-embedding-3-small
+High-accuracy production RAG:               text-embedding-3-large or BGE-large
+Self-hosted, cost-sensitive:                BGE-large-en-v1.5
+Domain-specific (medical, legal, code):     fine-tuned domain model or Instructor-xl
+
+Generating Embeddings
+
+from openai import OpenAI
+
+client = OpenAI()
+
+def embed(text: str) -> list[float]:
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=text
+    )
+    return response.data[0].embedding
+
+Batch embedding (much more efficient):
+
+def embed_batch(texts: list[str]) -> list[list[float]]:
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=texts  # up to 2048 texts per request
+    )
+    return [item.embedding for item in sorted(response.data, key=lambda x: x.index)]
+
+Always batch — single-item embedding calls are expensive at scale.
+
+Similarity Metrics
+
+Cosine similarity (most common):
+Measures the angle between two vectors. Range: -1 to 1.
+1.0 = identical meaning, 0 = unrelated, -1 = opposite.
+Standard choice for RAG.
+
+import numpy as np
+
+def cosine_similarity(a: list[float], b: list[float]) -> float:
+    a, b = np.array(a), np.array(b)
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+Dot product: faster, used internally by most vector DBs. Requires normalized vectors for the same results as cosine.
+
+Euclidean distance: geometric distance. Less common in NLP — use cosine for text.
+
+Critical Rules for Embeddings
+
+Never mix embedding models.
+Query and documents must be embedded with the same model.
+Mixing produces meaningless similarity scores.
+
+Never change embedding models mid-project.
+Changing models requires re-embedding all stored documents.
+Build a re-embedding pipeline before upgrading.
+
+Embed the same way you chunk.
+If chunks are 512 tokens with overlap, ensure no single chunk exceeds the model's input limit.
+text-embedding-3-small: 8191 token limit — fine for all standard chunk sizes.
+
+PART 2: CHUNKING
+
+Why Chunking Matters
+
+A 500-page PDF embedded as one vector = one similarity score compared against the query.
+The same PDF split into 2,000 chunks = 2,000 similarity scores, each from a specific passage.
+
+Chunking makes precise retrieval possible.
+
+Question: "How does token expiry work in JWT authentication?"
+Without chunking: one document embedding scores 0.41 against the query.
+With chunking: the specific paragraph about token expiry scores 0.89.
+
+Chunk Size Tradeoffs
+
+Too small (< 100 tokens):
+High precision — finds the exact sentence
+Loses surrounding context — LLM can't use it
+Answer is incomplete
+
+Too large (> 1000 tokens):
+Retrieval is imprecise — chunk is about many things at once
+Lower similarity scores — harder to rank correctly
+
+Sweet spot: 256–512 tokens with 50–150 token overlap.
+Adjust based on your document type and query style.
+
+Chunking Strategies
+
+1. Fixed-size chunking (baseline, rarely used in production)
+
+Split every N tokens regardless of content.
+Fast, simple, but breaks mid-sentence, mid-paragraph.
+
+def fixed_chunk(text: str, size: int = 500) -> list[str]:
+    tokens = text.split()
+    return [" ".join(tokens[i:i+size]) for i in range(0, len(tokens), size)]
+
+Use only as a baseline to compare against.
+
+2. Recursive chunking (production default)
+
+Splits on a hierarchy of separators: paragraph (\n\n) → sentence (\n) → word ( ).
+Preserves natural boundaries. Handles unstructured documents well.
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=512,
+    chunk_overlap=128,
+    length_function=len,
+    separators=["\n\n", "\n", ". ", " ", ""]
+)
+chunks = splitter.split_text(document_text)
+
+This is the right default for most RAG systems.
+
+3. Semantic chunking
+
+Split when the topic changes rather than at a fixed token count.
+Embed consecutive sentences and split where cosine similarity drops below a threshold.
+Produces more coherent chunks — each chunk is about one thing.
+
+Better retrieval quality than fixed/recursive for long, varied documents.
+Slower ingestion — requires embedding during chunking.
+Use for: research papers, books, long technical documentation.
+
+4. Document-aware chunking
+
+Use the document's own structure: headings, sections, table of contents.
+
+Markdown → split on ## headings
+HTML → split on <h2> / <section> tags
+PDF with structure → extract by PDF section hierarchy
+
+Result: each chunk maps to exactly one logical section.
+Best for: API documentation, product wikis, structured technical guides.
+
+Chunk Overlap
+
+Without overlap:
+
+Chunk A: "...authentication requires a valid JWT token."
+Chunk B: "The token must include the user_id claim..."
+
+The connection is lost at the boundary.
+
+With overlap (128 tokens):
+
+Chunk A: "...authentication requires a valid JWT token. The token must include the user_id claim..."
+Chunk B: "The token must include the user_id claim. Expiry is set via the exp field..."
+
+Context survives. Retrieval improves.
+
+Standard overlap: 15–25% of chunk size.
+chunk_size=512, chunk_overlap=128 is a strong production default.
+
+Metadata Enrichment
+
+Every chunk must carry metadata. Metadata enables filtered retrieval and source citations.
+
+def chunk_with_metadata(text: str, source: dict) -> list[dict]:
+    splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=128)
+    chunks = splitter.split_text(text)
+    return [
+        {
+            "text": chunk,
+            "metadata": {
+                "source":      source["filename"],
+                "page":        source.get("page"),
+                "section":     source.get("section"),
+                "doc_type":    source.get("type"),
+                "ingested_at": datetime.utcnow().isoformat(),
+            }
+        }
+        for chunk in chunks
+    ]
+
+At retrieval time: filter by doc_type="policy" before vector search.
+For citations: return source + page with every retrieved chunk.
+
+PART 3: INDEXING
+
+After embedding, chunks must be organized for fast retrieval. This is indexing.
+
+Without indexing: compare query vector against every stored vector — O(N) — 1 second for 10K docs, 100 seconds for 1M docs.
+With indexing: search a hierarchical structure — sub-linear — milliseconds at any scale.
+
+HNSW (Hierarchical Navigable Small Worlds)
+
+The most widely used vector index. Used by Qdrant, Weaviate, Chroma, and Pinecone.
+
+Structure: a multi-layer graph of vectors. Higher layers are sparse (fast navigation), lower layers are dense (accurate search).
+
+Workflow:
+Query enters at the top (sparse) layer
+Navigates down through layers, getting closer
+Returns approximate nearest neighbors at the bottom
+
+Parameters:
+m — number of connections per node (higher = more accurate, more memory)
+ef_construction — index build quality (higher = slower build, better recall)
+ef_search — search quality (tune at query time for accuracy/speed tradeoff)
+
+Benefits: fast (< 10ms for millions of vectors), high recall (98%+), scales well.
+Default choice for all workloads under 50M vectors.
+
+IVF (Inverted File Index)
+
+Clusters all vectors into N groups. At search time, only the nearest cluster(s) are searched.
+Faster for very large datasets but lower recall than HNSW.
+Used by FAISS for large-scale research workloads.
+
+Metadata Filtering
+
+Not all retrieval needs pure vector search. Combine metadata filters with vector search to narrow the search space first.
+
+from qdrant_client.models import Filter, FieldCondition, MatchValue
+
+results = client.search(
+    collection_name="documents",
+    query_vector=embed(user_query),
+    query_filter=Filter(
+        must=[
+            FieldCondition(key="doc_type", match=MatchValue(value="policy")),
+            FieldCondition(key="department", match=MatchValue(value="engineering"))
+        ]
+    ),
+    limit=10
+)
+
+Filter first → search smaller subset → faster, more precise.
+Essential for multi-tenant systems (filter by user_id) and domain-specific retrieval.
+
+Hybrid Indexing (Vector + Keyword)
+
+Pure vector search misses exact-term matches. BM25 keyword search misses semantic matches.
+Hybrid search combines both.
+
+from qdrant_client.models import SparseVector
+
+# Dense (semantic) search + sparse (keyword) search
+results = client.query_points(
+    collection_name="documents",
+    prefetch=[
+        models.Prefetch(query=embed(query), using="dense", limit=20),
+        models.Prefetch(query=sparse_embed(query), using="sparse", limit=20),
+    ],
+    query=models.FusionQuery(fusion=models.Fusion.RRF),  # Reciprocal Rank Fusion
+    limit=10
+)
+
+Reciprocal Rank Fusion (RRF) merges the two ranked lists into one.
+Consistently outperforms pure vector or pure keyword search on production benchmarks.
+
+Complete Ingestion Pipeline
+
+import pdfplumber
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from openai import OpenAI
+from qdrant_client import QdrantClient
+from qdrant_client.models import PointStruct
+
+def ingest_pdf(filepath: str, client: QdrantClient, openai: OpenAI):
+    # 1. Extract text
+    with pdfplumber.open(filepath) as pdf:
+        pages = [{"text": page.extract_text(), "page": i+1} for i, page in enumerate(pdf.pages)]
+
+    # 2. Chunk with metadata
+    splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=128)
+    chunks = []
+    for page in pages:
+        if not page["text"]:
+            continue
+        for chunk_text in splitter.split_text(page["text"]):
+            chunks.append({
+                "text": chunk_text,
+                "source": filepath,
+                "page": page["page"]
+            })
+
+    # 3. Embed in batches
+    texts = [c["text"] for c in chunks]
+    embeddings = embed_batch(texts)
+
+    # 4. Index in vector DB
+    points = [
+        PointStruct(
+            id=i,
+            vector=embeddings[i],
+            payload={"text": chunks[i]["text"], "source": chunks[i]["source"], "page": chunks[i]["page"]}
+        )
+        for i in range(len(chunks))
+    ]
+    client.upsert(collection_name="documents", points=points)
+    return len(chunks)
+
+Production Best Practices
+
+Embeddings:
+Use text-embedding-3-small as default; upgrade to 3-large only if retrieval quality is demonstrably insufficient
+Always batch embed (up to 2048 texts per request)
+Never mix embedding models — define the model in a config constant and enforce it everywhere
+Re-embed all documents when you change models
+
+Chunking:
+Use RecursiveCharacterTextSplitter as the default
+chunk_size=512, chunk_overlap=128 for most document types
+chunk_size=256, chunk_overlap=64 for dense technical docs (code, legal)
+chunk_size=1024, chunk_overlap=256 for narrative text (books, long articles)
+Always attach metadata — source, page, section, ingestion timestamp
+
+Indexing:
+HNSW for all workloads under 50M vectors
+Enable metadata filtering — filter before vector search, not after
+Add hybrid search (BM25 + vector) when your documents have important exact terms
+Build a reindexing pipeline before you need it — documents change`,
         keyPoints: [
-          "Chunking: split documents into 256–512 token overlapping chunks (128 token overlap)",
-          "text-embedding-3-small: OpenAI's fast, cheap embedding model",
-          "Cosine similarity: measure angle between vectors — 1.0 = identical, 0 = unrelated",
-          "Chunk overlap: repeat 128 tokens between chunks to avoid cutting mid-sentence",
-          "Metadata: store source, page, section alongside each chunk for citations",
+          "Ingestion pipeline: Documents → Extract → Clean → Chunk → Metadata → Embed → Index → Vector DB — runs once",
+          "Embedding = text → fixed-size float vector; similar meaning → nearby vectors; different meaning → distant vectors",
+          "text-embedding-3-small: default for most RAG (1536 dims, cheap); text-embedding-3-large: high-stakes retrieval",
+          "Never mix embedding models — query and documents must use the same model or similarity scores are meaningless",
+          "Batch embed (up to 2048 texts per request) — single-call embedding is 100x more expensive at scale",
+          "Recursive chunking (RecursiveCharacterTextSplitter): splits on \\n\\n → \\n → sentence — production default",
+          "chunk_size=512, chunk_overlap=128: strong default; overlap prevents information loss at chunk boundaries",
+          "Semantic chunking: split when topic changes (embedding similarity drops) — better quality, slower ingestion",
+          "Every chunk needs metadata: source, page, section, doc_type, ingested_at — enables filtering and citations",
+          "HNSW index: hierarchical graph, < 10ms search at millions of vectors — default for all workloads under 50M",
+          "Metadata filtering: filter by department/doc_type/user_id BEFORE vector search — faster and more precise",
+          "Hybrid search (vector + BM25 with RRF fusion): consistently outperforms pure vector on production benchmarks",
         ],
         project:
-          "Build a document QA system from scratch: ingest 5 PDFs (extract text, chunk, embed, store in pgvector). Given a question, embed it, find top-5 chunks, inject into prompt, get answer with citations. Test on 20 questions. Measure how retrieval quality affects answer accuracy.",
-        stack: ["OpenAI Embeddings", "pgvector", "pdfplumber", "PostgreSQL"],
-        resources: [],
+          "Build a complete document ingestion and retrieval system. Ingestion: take 5 PDFs (at least 50 pages each), extract text with pdfplumber, chunk with RecursiveCharacterTextSplitter (chunk_size=512, chunk_overlap=128), attach metadata (source filename, page number, section if detectable), batch-embed with text-embedding-3-small, and store in Qdrant with metadata payload. Retrieval: given a question, embed it, search Qdrant for top-10 chunks, inject them into an LLM prompt with source citations. Test 3 chunking strategies on the same documents — fixed (500 tokens), recursive (512/128), and semantic (split on embedding similarity drop) — and measure retrieval quality on 20 questions where you know the correct answer (hit rate: was the correct chunk in the top-5?). Then add metadata filtering: tag each document with a category (technical, policy, reference), add a filter parameter to your search function, and confirm that filtering by category reduces irrelevant results. Finally, implement hybrid search by adding a sparse BM25 vector to each Qdrant point alongside the dense vector, and measure whether hybrid search improves hit rate on exact-term queries.",
+        stack: ["OpenAI Embeddings", "Qdrant", "pdfplumber", "LangChain Text Splitters", "PostgreSQL", "Python"],
+        resources: [
+          { title: "OpenAI Embeddings Guide", url: "https://platform.openai.com/docs/guides/embeddings" },
+          { title: "Qdrant Documentation", url: "https://qdrant.tech/documentation/" },
+          { title: "LangChain Text Splitters", url: "https://python.langchain.com/docs/how_to/recursive_text_splitter/" },
+          { title: "BEIR Benchmark (embedding model comparison)", url: "https://github.com/beir-cellar/beir" },
+        ],
       },
       {
         id: "rag-vectordbs",
@@ -4334,19 +5591,364 @@ Retry with exponential backoff for transient failures`,
         label: "Vector Databases",
         level: "intermediate",
         concept:
-          "Vector databases store embeddings and retrieve them by similarity. They're purpose-built for this — far faster than adding cosine similarity to PostgreSQL for millions of vectors. Each has tradeoffs: ChromaDB (local, no infra, perfect for prototypes), Pinecone (managed, production-scale, serverless), Weaviate (open-source, multi-modal), Qdrant (open-source, Rust-based, fast), FAISS (Facebook, local, no server needed).",
+          "A vector database is a specialized database built to store, index, and retrieve embeddings by similarity. Traditional SQL databases excel at exact matching — WHERE city = 'Mumbai' works because the strings are identical. RAG requires semantic matching — 'how can I learn Python?' must surface 'Python tutorial', 'beginner Python course', and 'introduction to programming' even though none of those contain the exact query words. Vector databases solve this by storing float vectors and finding the nearest ones using cosine similarity or dot product, with indexes that make search sub-linear even at millions of documents.\n\nEvery record in a vector database contains three things: the embedding vector, the original text (payload), and metadata. Metadata is what separates a useful production system from a slow one — by filtering on department='finance' or doc_type='policy' before running vector search, you shrink the search space dramatically and eliminate irrelevant results entirely. Without metadata filtering, a query about finance policy surfaces chunks from every department. With it, only the finance documents are ever searched.\n\nChoosing a vector database is an infrastructure decision, not just a technical one. Chroma is the right choice for local development and prototypes — zero setup, runs in-process. Qdrant is the production default for most teams: open-source, Rust-based, fast HNSW, strong metadata filtering, available self-hosted or managed. Pinecone is fully managed and serverless — the right call when you want zero infrastructure overhead at scale. pgvector extends PostgreSQL with vector search — the right choice when you want one database for both relational and vector data. Every serious team builds a VectorDB abstraction layer so the backend can be swapped without changing application code.",
+        deepDive: `Vector databases are purpose-built for one operation: given a query vector, find the N most similar vectors in storage as fast as possible.
+
+Why Traditional Databases Fail
+
+Traditional SQL databases use indexes for exact and range lookups — B-tree for equality and range, full-text index for keyword search.
+
+SELECT * FROM docs WHERE content LIKE '%Python%'
+
+This finds exact substring matches. It cannot find semantically related content.
+
+"Learn Python" does not LIKE-match "Python programming tutorial for beginners."
+
+Vector search finds it because both embed to nearby vectors in semantic space.
+
+The O(N) Problem
+
+Naive similarity search: compare query vector against every stored vector.
+
+10K vectors: ~5ms — acceptable
+1M vectors: ~500ms — too slow
+100M vectors: ~50s — unusable
+
+Vector databases solve this with approximate nearest neighbor indexes (ANN) — structured search that finds results in milliseconds at any scale, trading a tiny amount of accuracy for a massive speed gain.
+
+What a Vector DB Stores
+
+Every record (called a point in Qdrant, a document in Chroma) contains:
+
+{
+  "id": "uuid-or-int",
+  "vector": [0.12, -0.55, 0.89, ...],   # the embedding
+  "payload": {                            # metadata + content
+    "text":       "Python is a programming language...",
+    "source":     "python_docs.pdf",
+    "page":       12,
+    "section":    "Introduction",
+    "doc_type":   "documentation",
+    "ingested_at": "2025-01-15T10:30:00Z"
+  }
+}
+
+The vector enables similarity search.
+The payload enables metadata filtering and source citations.
+
+Core Operations
+
+Upsert (insert or update):
+
+client.upsert(
+    collection_name="documents",
+    points=[
+        PointStruct(id=1, vector=embed(text), payload={"text": text, "source": "policy.pdf"})
+    ]
+)
+
+Search:
+
+results = client.search(
+    collection_name="documents",
+    query_vector=embed(user_query),
+    limit=10
+)
+for r in results:
+    print(r.score, r.payload["text"])
+
+Delete:
+
+client.delete("documents", points_selector=PointIdsList(points=[1, 2, 3]))
+
+Scroll (retrieve all without search):
+
+results, next_page = client.scroll("documents", limit=100, offset=None)
+
+Metadata Filtering
+
+Filtering runs before vector search — it narrows the search space so similarity search only runs over relevant records.
+
+from qdrant_client.models import Filter, FieldCondition, MatchValue, Range
+
+# Filter by exact value
+results = client.search(
+    collection_name="documents",
+    query_vector=embed(query),
+    query_filter=Filter(must=[
+        FieldCondition(key="doc_type", match=MatchValue(value="policy"))
+    ]),
+    limit=5
+)
+
+# Filter by multiple conditions
+results = client.search(
+    collection_name="documents",
+    query_vector=embed(query),
+    query_filter=Filter(must=[
+        FieldCondition(key="department", match=MatchValue(value="finance")),
+        FieldCondition(key="year",       range=Range(gte=2024))
+    ]),
+    limit=5
+)
+
+Production pattern: always expose filter parameters in your search function.
+
+def search(query: str, doc_type: str = None, department: str = None, top_k: int = 5):
+    filters = []
+    if doc_type:
+        filters.append(FieldCondition(key="doc_type", match=MatchValue(value=doc_type)))
+    if department:
+        filters.append(FieldCondition(key="department", match=MatchValue(value=department)))
+
+    return client.search(
+        collection_name="documents",
+        query_vector=embed(query),
+        query_filter=Filter(must=filters) if filters else None,
+        limit=top_k
+    )
+
+Vector Database Options
+
+1. Qdrant — production default for most teams
+
+Open-source, written in Rust. Excellent HNSW implementation, strong metadata filtering, available as Docker container or managed cloud.
+
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, VectorParams, PointStruct
+
+client = QdrantClient(url="http://localhost:6333")   # Docker
+# client = QdrantClient(url="https://xyz.qdrant.io", api_key="...")  # cloud
+
+client.create_collection(
+    collection_name="documents",
+    vectors_config=VectorParams(size=1536, distance=Distance.COSINE)
+)
+
+client.upsert("documents", points=[
+    PointStruct(id=1, vector=embed(text), payload={"text": text, "source": "docs.pdf"})
+])
+
+results = client.search("documents", query_vector=embed(query), limit=5)
+
+Best for: self-hosted production systems, teams that want control and performance.
+
+2. Chroma — local development default
+
+In-process or client-server. Zero infrastructure setup. Perfect for prototyping and small-scale deployment.
+
+import chromadb
+
+client = chromadb.PersistentClient(path="./chroma")
+collection = client.get_or_create_collection("documents")
+
+collection.add(
+    ids=["1", "2", "3"],
+    embeddings=[embed(t) for t in texts],
+    documents=texts,
+    metadatas=[{"source": "docs.pdf", "page": i} for i in range(len(texts))]
+)
+
+results = collection.query(query_embeddings=[embed(query)], n_results=5)
+
+Best for: prototypes, local testing, tutorials. Not recommended for production at scale.
+
+3. Pinecone — managed cloud, zero infrastructure
+
+Fully serverless. No containers to manage. Auto-scales. Best choice when infrastructure overhead must be zero.
+
+from pinecone import Pinecone, ServerlessSpec
+
+pc = Pinecone(api_key="...")
+pc.create_index("documents", dimension=1536, metric="cosine",
+    spec=ServerlessSpec(cloud="aws", region="us-east-1"))
+
+index = pc.Index("documents")
+
+index.upsert(vectors=[
+    {"id": "1", "values": embed(text), "metadata": {"text": text, "source": "docs.pdf"}}
+])
+
+results = index.query(vector=embed(query), top_k=5, include_metadata=True)
+
+Best for: early-stage teams that want fast setup and managed scaling without DevOps.
+
+4. pgvector — vector search inside PostgreSQL
+
+Extension that adds a vector column type and ANN index to PostgreSQL. Right choice when you want one database for both relational and vector data — no separate vector DB infrastructure.
+
+pip install pgvector psycopg2-binary
+
+CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE TABLE documents (
+    id         SERIAL PRIMARY KEY,
+    content    TEXT,
+    source     TEXT,
+    page       INTEGER,
+    embedding  vector(1536)
+);
+
+CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops);
+
+Python:
+
+from pgvector.psycopg2 import register_vector
+import psycopg2, numpy as np
+
+conn = psycopg2.connect(DATABASE_URL)
+register_vector(conn)
+
+with conn.cursor() as cur:
+    cur.execute(
+        "INSERT INTO documents (content, source, embedding) VALUES (%s, %s, %s)",
+        [text, "docs.pdf", embed(text)]
+    )
+
+    cur.execute(
+        "SELECT content, source, 1 - (embedding <=> %s) AS score FROM documents ORDER BY embedding <=> %s LIMIT 5",
+        [embed(query), embed(query)]
+    )
+    results = cur.fetchall()
+
+Best for: teams already on PostgreSQL, startups that want to minimize infrastructure, SQL-fluent teams.
+
+5. FAISS — in-process library, not a full database
+
+Facebook AI Similarity Search. A library, not a server — runs in the same Python process. No persistence by default. Extremely fast for research and offline batch workloads.
+
+import faiss, numpy as np
+
+dimension = 1536
+index = faiss.IndexFlatIP(dimension)         # exact dot product
+index = faiss.IndexHNSWFlat(dimension, 32)   # HNSW approximate
+
+vectors = np.array([embed(t) for t in texts], dtype=np.float32)
+faiss.normalize_L2(vectors)
+index.add(vectors)
+
+query_vec = np.array([embed(query)], dtype=np.float32)
+faiss.normalize_L2(query_vec)
+D, I = index.search(query_vec, k=5)  # D=distances, I=indices
+
+Best for: research, offline batch processing, when you want maximum speed and no server overhead.
+
+Hybrid Search — Vector + Keyword
+
+Pure vector search misses exact-term matches. BM25 keyword search misses semantic matches.
+Hybrid search combines both.
+
+Example query: "PTO policy"
+Vector search alone: finds "vacation allowance guidelines" (semantic match) but misses "PTO" exact occurrences
+Keyword search alone: finds "PTO" but misses "paid time off" and "leave policy"
+Hybrid: finds both
+
+Qdrant hybrid search with Reciprocal Rank Fusion:
+
+from qdrant_client.models import SparseVector, Prefetch, FusionQuery, Fusion
+
+results = client.query_points(
+    collection_name="documents",
+    prefetch=[
+        Prefetch(query=embed(query),        using="dense",  limit=20),
+        Prefetch(query=sparse_embed(query), using="sparse", limit=20),
+    ],
+    query=FusionQuery(fusion=Fusion.RRF),
+    limit=5
+)
+
+Always implement hybrid search in production — it consistently outperforms pure vector on benchmarks.
+
+Multi-Tenant Architecture
+
+Enterprise systems serve multiple users or organizations in one vector DB.
+
+Option 1 — Collection per tenant (strong isolation, high overhead):
+Client A → collection_client_a
+Client B → collection_client_b
+
+Option 2 — Metadata filter per tenant (single collection, efficient):
+
+results = client.search(
+    "documents",
+    query_vector=embed(query),
+    query_filter=Filter(must=[FieldCondition(key="tenant_id", match=MatchValue(value=user.tenant_id))]),
+    limit=5
+)
+
+Option 2 is standard — one collection, always filter by tenant_id. Never let queries cross tenant boundaries.
+
+VectorDB Abstraction Layer
+
+Build a protocol so your application never touches the vector DB client directly.
+
+from abc import ABC, abstractmethod
+
+class VectorStore(ABC):
+    @abstractmethod
+    def upsert(self, id: str, vector: list[float], payload: dict): ...
+
+    @abstractmethod
+    def search(self, query_vector: list[float], top_k: int, filters: dict = None) -> list[dict]: ...
+
+    @abstractmethod
+    def delete(self, ids: list[str]): ...
+
+class QdrantStore(VectorStore):
+    def __init__(self, url: str, collection: str):
+        self.client = QdrantClient(url=url)
+        self.collection = collection
+
+    def upsert(self, id: str, vector, payload):
+        self.client.upsert(self.collection, points=[PointStruct(id=id, vector=vector, payload=payload)])
+
+    def search(self, query_vector, top_k=5, filters=None):
+        results = self.client.search(self.collection, query_vector=query_vector, limit=top_k)
+        return [{"text": r.payload["text"], "score": r.score, "source": r.payload.get("source")} for r in results]
+
+    def delete(self, ids):
+        self.client.delete(self.collection, points_selector=PointIdsList(points=ids))
+
+Swap to ChromaStore, PineconeStore, or PgvectorStore by changing one line at instantiation.
+
+Choosing the Right Vector DB
+
+Prototyping or local dev:              Chroma
+Production, self-hosted:               Qdrant
+Production, managed zero-infra:        Pinecone
+Already on PostgreSQL:                 pgvector
+Research / offline batch:              FAISS
+Multi-modal or graph features:         Weaviate
+
+Comparison on the things that matter:
+
+Qdrant:   self-hosted or cloud, excellent filtering, hybrid search, Rust performance
+Chroma:   zero setup, embedded or server, limited production features
+Pinecone: fully managed, serverless, auto-scale, vendor lock-in
+pgvector: SQL joins, transactional, single DB, slower than dedicated vector DBs at scale
+FAISS:    fastest search, no server, no persistence without custom code`,
         keyPoints: [
-          "ChromaDB: chroma.PersistentClient(path='./chroma') — local, great for prototypes",
-          "Pinecone: managed, serverless, scales to billions — production pick for early teams",
-          "Qdrant: self-hosted or cloud, fast, great filtering — strong competitor to Pinecone",
-          "Weaviate: multi-modal, GraphQL API, good for complex schemas",
-          "FAISS: Facebook's library — no server, in-process — for research and offline use",
+          "Vector DB core operation: store embedding + payload → given query vector, return N nearest by cosine similarity",
+          "Every record = vector (for search) + payload (text, source, page, doc_type, tenant_id) — both are required",
+          "Metadata filtering runs BEFORE vector search — filter by department/doc_type/tenant_id to shrink search space first",
+          "HNSW index: sub-linear ANN search, < 10ms at millions of vectors, 98%+ recall — default for all production workloads",
+          "Qdrant: open-source Rust, strong HNSW + filtering, Docker or cloud — best default for self-hosted production",
+          "Chroma: PersistentClient(path='./chroma'), zero setup — right choice for local dev and prototypes only",
+          "Pinecone: fully serverless, auto-scales, zero DevOps — right when infrastructure overhead must be zero",
+          "pgvector: CREATE EXTENSION vector; vector(1536) column + HNSW index — one DB for relational + vector data",
+          "FAISS: in-process library, no server, IndexHNSWFlat for ANN — research, offline batch, no server overhead",
+          "Hybrid search (vector + BM25 + RRF fusion): always outperforms pure vector on production benchmarks",
+          "Multi-tenant: single collection with tenant_id metadata filter — never let queries cross tenant boundaries",
+          "VectorStore abstraction: define upsert/search/delete interface — swap backends without changing application code",
         ],
         project:
-          "Implement the same RAG system with 3 vector databases: ChromaDB (local), Pinecone (cloud), and Qdrant (Docker). Compare setup complexity, query latency (p50, p95), memory usage, and filtering capabilities. Write a VectorDB interface so your agent can swap backends with one line.",
-        stack: ["ChromaDB", "Pinecone", "Qdrant"],
+          "Build a provider-agnostic RAG system with a VectorStore abstraction. Implement the interface for three backends: QdrantStore (Docker, local), ChromaStore (PersistentClient), and PgvectorStore (PostgreSQL + pgvector extension). Ingest the same 100 document chunks into all three. Write a benchmark: for 20 queries, measure p50 and p95 search latency, verify all three return the same top-5 results for each query (within a small score tolerance), and confirm metadata filtering by doc_type works on all three. Add multi-tenant support: tag half the chunks with tenant_id='a' and half with tenant_id='b', then confirm a search with tenant_id='a' filter never returns a tenant_b chunk. Finally, implement hybrid search on the Qdrant backend — add a sparse BM25 vector field alongside the dense vector, run the same 20 queries with hybrid vs dense-only, and report whether hybrid search improves top-5 hit rate on exact-term queries. Swap backends by changing one instantiation line and confirm the benchmark numbers are consistent.",
+        stack: ["Qdrant", "ChromaDB", "pgvector", "PostgreSQL", "OpenAI Embeddings", "Python"],
         resources: [
-          { title: "Qdrant Docs", url: "https://qdrant.tech/documentation/" },
+          { title: "Qdrant Documentation", url: "https://qdrant.tech/documentation/" },
+          { title: "pgvector GitHub", url: "https://github.com/pgvector/pgvector" },
+          { title: "Pinecone Documentation", url: "https://docs.pinecone.io/" },
+          { title: "Chroma Documentation", url: "https://docs.trychroma.com/" },
         ],
       },
       {
@@ -4355,18 +5957,331 @@ Retry with exponential backoff for transient failures`,
         label: "Advanced RAG",
         level: "advanced",
         concept:
-          "Basic RAG retrieves the top-k most similar chunks. Advanced RAG dramatically improves accuracy: Hybrid search combines semantic (vector) and keyword (BM25) search — catches exact matches that semantic search misses. Reranking re-scores retrieved chunks with a cross-encoder model — the initial retrieval is fast but coarse, reranking is slow but accurate. Query transformation rewrites vague queries to match document language.",
+          "Basic RAG — question → vector search → top-k chunks → LLM → answer — works for small projects. In production systems with millions of documents, complex queries, and enterprise knowledge bases, it breaks down: retrieval misses relevant content, chunks lack context, answers are incomplete or hallucinated. Advanced RAG is a set of techniques that each address a specific failure mode of basic RAG, and in practice you layer several of them together.\n\nThe first upgrade that every production system should make is hybrid search — combining dense vector search with sparse BM25 keyword search, merged via Reciprocal Rank Fusion. Pure vector search misses exact-term queries ('PTO policy' may not surface chunks containing only the acronym 'PTO'). Pure keyword search misses semantic queries. Hybrid catches both. The second most impactful upgrade is reranking: retrieve the top-20 candidates fast with vector search, then pass them through a cross-encoder reranker (Cohere Rerank, BGE Reranker) that scores each chunk against the full query. The reranker is slower but far more accurate — it surfaces the 5 truly relevant chunks from the 20 candidates. Query transformation techniques (multi-query, HyDE, step-back prompting) address the problem that the user's question often doesn't match the language of the documents.\n\nBeyond retrieval improvements, architectural patterns like parent-child retrieval, agentic RAG, and corrective RAG (CRAG) change how the system uses retrieved content. Parent-child stores small embeddings for precision but returns the full parent section for context. Agentic RAG loops — retrieve, reason, identify gaps, retrieve again — until the answer can be fully supported. CRAG evaluates retrieval quality before answering and triggers a new search if relevance is too low. Production advanced RAG is a pipeline with multiple stages, each measurable and tunable independently.",
+        deepDive: `Advanced RAG is not a single technique — it is a collection of improvements, each targeting a specific weakness. Layer them based on what your evaluation metrics tell you is failing.
+
+RAG Evolution
+
+Generation 1 — Basic RAG
+Question → Vector Search → Top-K → LLM → Answer
+Works for simple demos. Breaks at production scale.
+
+Generation 2 — Improved Retrieval
+Hybrid search + reranking + query transformation
+Significantly better accuracy. Required for most production use cases.
+
+Generation 3 — Agentic RAG
+Retrieve → Reason → Identify gaps → Retrieve again → Verify → Answer
+Handles complex multi-step questions.
+
+Generation 4 — Multi-Agent RAG
+Retriever Agent + Research Agent + Reasoning Agent + Answer Agent
+Enterprise-scale knowledge systems.
+
+1. Hybrid Search
+
+The most impactful single upgrade. Combines dense vector search with sparse BM25 keyword search.
+
+Why it matters:
+Vector search: finds "vacation allowance guidelines" when asked about "PTO" (semantic match)
+BM25 search: finds "PTO" when asked about "PTO" (exact term match)
+Hybrid: finds both
+
+Implementation with rank_bm25 + vector search:
+
+from rank_bm25 import BM25Okapi
+import numpy as np
+
+class HybridSearcher:
+    def __init__(self, chunks: list[str], embeddings: list[list[float]]):
+        tokenized = [c.lower().split() for c in chunks]
+        self.bm25 = BM25Okapi(tokenized)
+        self.embeddings = np.array(embeddings)
+        self.chunks = chunks
+
+    def search(self, query: str, top_k: int = 10, alpha: float = 0.5) -> list[dict]:
+        # BM25 scores (sparse)
+        bm25_scores = self.bm25.get_scores(query.lower().split())
+        bm25_norm = (bm25_scores - bm25_scores.min()) / (bm25_scores.max() - bm25_scores.min() + 1e-9)
+
+        # Vector scores (dense)
+        query_vec = np.array(embed(query))
+        dot_products = self.embeddings @ query_vec
+        vec_norm = (dot_products - dot_products.min()) / (dot_products.max() - dot_products.min() + 1e-9)
+
+        # Fuse with Reciprocal Rank Fusion or weighted sum
+        combined = alpha * vec_norm + (1 - alpha) * bm25_norm
+        top_indices = np.argsort(combined)[::-1][:top_k]
+        return [{"text": self.chunks[i], "score": float(combined[i])} for i in top_indices]
+
+alpha=0.5: equal weight. alpha=0.7: favour semantic. alpha=0.3: favour keyword.
+Tune alpha on your evaluation set.
+
+2. Reranking
+
+Initial vector retrieval is fast but coarse — it finds approximately relevant chunks.
+A cross-encoder reranker reads the full (query, chunk) pair and scores each chunk far more accurately.
+
+Pattern: retrieve top-20 fast → rerank → take top-5.
+
+With Cohere Rerank:
+
+import cohere
+
+co = cohere.Client("...")
+
+def rerank(query: str, chunks: list[str], top_n: int = 5) -> list[str]:
+    results = co.rerank(
+        model="rerank-v3.5",
+        query=query,
+        documents=chunks,
+        top_n=top_n
+    )
+    return [chunks[r.index] for r in results.results]
+
+With a local cross-encoder (BGE Reranker):
+
+from sentence_transformers import CrossEncoder
+
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
+
+def rerank_local(query: str, chunks: list[str], top_n: int = 5) -> list[str]:
+    pairs = [[query, chunk] for chunk in chunks]
+    scores = reranker.predict(pairs)
+    ranked = sorted(zip(chunks, scores), key=lambda x: x[1], reverse=True)
+    return [chunk for chunk, _ in ranked[:top_n]]
+
+Reranking consistently produces the largest accuracy jump in production benchmarks.
+Always retrieve 3–4× more candidates than you need (retrieve 20, rerank to 5).
+
+3. Query Transformation
+
+Users rarely phrase queries the same way documents are written.
+Query transformation bridges this gap before retrieval.
+
+Multi-Query Retrieval — generate multiple query variants, retrieve for each, merge:
+
+def multi_query_retrieve(question: str, top_k_per_query: int = 5) -> list[str]:
+    prompt = f"""Generate 4 different search queries for this question.
+Return as JSON array. Question: {question}"""
+    queries = json.loads(llm_call(prompt))
+
+    seen, results = set(), []
+    for q in queries:
+        chunks = vector_search(q, top_k=top_k_per_query)
+        for chunk in chunks:
+            if chunk not in seen:
+                seen.add(chunk)
+                results.append(chunk)
+    return results
+
+Example: "How does FastAPI authentication work?" generates:
+"FastAPI JWT authentication tutorial"
+"OAuth2 with FastAPI example"
+"FastAPI security middleware"
+"Bearer token FastAPI implementation"
+
+HyDE (Hypothetical Document Embeddings) — generate a hypothetical ideal answer, embed that, search:
+
+def hyde_search(question: str, top_k: int = 5) -> list[str]:
+    hypothetical_answer = llm_call(
+        f"Write a detailed answer to this question as if you were an expert:\n{question}"
+    )
+    return vector_search(hypothetical_answer, top_k=top_k)
+
+HyDE works because the hypothetical answer uses the same vocabulary as real documents.
+Especially effective when user questions use different terminology than the source material.
+
+Step-Back Prompting — transform specific questions into broader ones to retrieve general principles:
+
+User: "Why does my FastAPI POST /users endpoint return 422?"
+Step-back: "What causes 422 validation errors in FastAPI?"
+
+def step_back(question: str) -> str:
+    return llm_call(f"Rewrite this specific question as a more general principle question: {question}")
+
+4. Parent-Child Retrieval
+
+The fundamental tension in chunking: small chunks have high retrieval precision but lose context; large chunks have rich context but low precision.
+
+Parent-child solves this: embed small chunks for precise retrieval, but return the full parent section to the LLM.
+
+class ParentChildRetriever:
+    def __init__(self):
+        self.child_store = {}   # child_id → child_text (for embedding)
+        self.parent_store = {}  # parent_id → full parent text (for LLM)
+        self.child_to_parent = {}
+
+    def ingest(self, parent_id: str, parent_text: str, child_size: int = 200):
+        self.parent_store[parent_id] = parent_text
+        children = split_text(parent_text, chunk_size=child_size, overlap=50)
+        for i, child in enumerate(children):
+            child_id = f"{parent_id}_child_{i}"
+            self.child_store[child_id] = child
+            self.child_to_parent[child_id] = parent_id
+            upsert_vector(child_id, embed(child), {"text": child})
+
+    def retrieve(self, query: str, top_k: int = 3) -> list[str]:
+        child_results = vector_search(embed(query), top_k=top_k * 3)
+        parent_ids = {self.child_to_parent[r.id] for r in child_results}
+        return [self.parent_store[pid] for pid in list(parent_ids)[:top_k]]
+
+Search finds the precise child chunk; LLM receives the full parent context.
+
+5. Contextual Retrieval
+
+Chunks often lose meaning without their document context.
+
+Standalone chunk: "It was approved in 2024." — meaningless.
+Contextualized chunk: "From Acme Corp Security Policy v3.1: It was approved in 2024." — useful.
+
+def add_context_to_chunk(document_summary: str, chunk: str) -> str:
+    prompt = f"""Given the document:
+{document_summary}
+
+Add a one-sentence context prefix to this chunk so it makes sense when retrieved in isolation:
+{chunk}
+
+Return only the contextualized chunk."""
+    return llm_call(prompt)
+
+Run this at ingestion time. Store the contextualized version as the embedding text.
+Anthropic published research showing this improves retrieval accuracy by 49%.
+
+6. Agentic RAG
+
+Instead of one fixed retrieval round, the agent decides when and what to retrieve.
+
+async def agentic_rag(question: str, max_iterations: int = 5) -> str:
+    context = []
+    messages = [{"role": "user", "content": question}]
+
+    for i in range(max_iterations):
+        tools = [search_tool, done_tool]
+        response = await llm_with_tools(messages, tools)
+
+        if response.tool_calls:
+            for tc in response.tool_calls:
+                if tc.name == "search_documents":
+                    results = vector_search(tc.args["query"], top_k=5)
+                    context.extend(results)
+                    messages.append(tool_result(tc.id, format_results(results)))
+                elif tc.name == "done":
+                    return tc.args["answer"]
+        else:
+            return response.text
+
+    return summarize_with_context(question, context)
+
+The agent can search multiple times, follow up on gaps, and stop when confident.
+Powers systems like Perplexity and Claude's research mode.
+
+7. Corrective RAG (CRAG)
+
+CRAG evaluates retrieval quality before answering. If retrieved chunks are not relevant enough, it triggers a web search or different retrieval strategy.
+
+def crag_pipeline(question: str) -> str:
+    chunks = vector_search(question, top_k=10)
+    relevance_scores = [score_relevance(question, c) for c in chunks]
+    avg_relevance = sum(relevance_scores) / len(relevance_scores)
+
+    if avg_relevance > 0.7:
+        # Good retrieval — proceed
+        return generate_answer(question, chunks)
+    elif avg_relevance > 0.3:
+        # Mixed — supplement with web search
+        web_results = web_search(question)
+        return generate_answer(question, chunks + web_results)
+    else:
+        # Poor retrieval — fall back to web search entirely
+        web_results = web_search(question)
+        return generate_answer(question, web_results)
+
+def score_relevance(question: str, chunk: str) -> float:
+    response = llm_call(f"Score 0-1: how relevant is this chunk to the question?\nQ: {question}\nChunk: {chunk}\nScore:")
+    return float(response.strip())
+
+8. Graph RAG
+
+Instead of flat vector search, Graph RAG stores entities and relationships as a knowledge graph and traverses it during retrieval.
+
+Multi-hop query: "Who is the CEO of the company that acquired GitHub?"
+Vector search: retrieves chunks mentioning GitHub or Microsoft separately — may miss the connection.
+Graph traversal: GitHub → acquired_by → Microsoft → CEO → Satya Nadella.
+
+Graph RAG is used in Microsoft's GraphRAG library and is particularly effective for enterprise knowledge bases with complex entity relationships.
+
+RAG Evaluation
+
+Every advanced RAG system must be evaluated. Without measurement, tuning is guesswork.
+
+from ragas import evaluate
+from ragas.metrics import faithfulness, answer_relevancy, context_precision, context_recall
+
+dataset = [
+    {"question": q, "answer": a, "contexts": c, "ground_truth": g}
+    for q, a, c, g in test_cases
+]
+
+scores = evaluate(dataset, metrics=[faithfulness, answer_relevancy, context_precision, context_recall])
+print(scores)
+
+Four metrics:
+Faithfulness — is the answer supported by the retrieved chunks? (no hallucination)
+Answer relevancy — does the answer actually address the question?
+Context precision — are the retrieved chunks relevant? (retrieval quality)
+Context recall — did retrieval find all the information needed?
+
+Run evaluation on 50–100 test cases with known ground truth after every pipeline change.
+
+Advanced RAG Pipeline
+
+Full production stack:
+
+Query in
+↓
+Query transformation (multi-query + step-back)
+↓
+Hybrid retrieval (dense + BM25 + RRF)
+↓
+Metadata filtering
+↓
+Reranking (Cohere Rerank v3.5 or BGE)
+↓
+Parent-child resolution (return full parent sections)
+↓
+Context deduplication and compression
+↓
+LLM call with retrieved context
+↓
+Faithfulness check
+↓
+Answer out
+
+Not every system needs all stages. Start with hybrid + reranking. Add the others based on evaluation metrics showing what is failing.`,
         keyPoints: [
-          "Hybrid search: α × vector_score + (1-α) × bm25_score — best of both worlds",
-          "Reranking: Cohere rerank API or cross-encoder model — reorder top-20 to get top-5",
-          "HyDE: generate a hypothetical answer → embed that → search for similar real content",
-          "Query expansion: rewrite query as 3 variants → retrieve for each → merge results",
-          "Context optimization: remove redundant chunks before injecting — save tokens",
+          "Hybrid search (vector + BM25 + RRF): the single most impactful upgrade — catches exact-term queries vector misses",
+          "alpha=0.5 (equal weight) is a safe default; tune alpha on your eval set toward semantic or keyword based on query types",
+          "Reranking: retrieve top-20 fast → CrossEncoder or Cohere Rerank → return top-5 — biggest single accuracy jump",
+          "Always over-retrieve for reranking: retrieve 3-4× more candidates than you need (retrieve 20, rerank to 5)",
+          "Multi-query: LLM generates 4 query variants → retrieve for each → deduplicate → merge all results",
+          "HyDE: generate hypothetical ideal answer → embed the answer → search with that vector — bridges query/document vocabulary gap",
+          "Step-back prompting: rewrite specific question as general principle → retrieve broader context first",
+          "Parent-child: embed small chunks (200 tokens) for precision; return full parent section (1000 tokens) to the LLM",
+          "Contextual retrieval: prepend document context to each chunk at ingestion — 'From Acme Policy v3: ...' — 49% recall improvement",
+          "Agentic RAG: LLM decides when to retrieve, what to search for, and when it has enough — loops until confident",
+          "CRAG: score retrieved chunk relevance before answering; below threshold → re-search or fall back to web search",
+          "Evaluation with RAGAS: faithfulness, answer_relevancy, context_precision, context_recall — measure after every change",
         ],
         project:
-          "Upgrade your RAG system: implement hybrid search (vector + BM25 via rank_bm25), add Cohere reranking, implement HyDE (hypothetical document embeddings). Benchmark on 30 questions: compare basic RAG vs hybrid vs hybrid+reranking. Measure accuracy and latency at each stage.",
-        stack: ["Cohere API", "rank_bm25", "pgvector", "FastAPI"],
-        resources: [],
+          "Build a production advanced RAG pipeline in stages, measuring accuracy at each stage on a fixed evaluation set of 30 questions with known correct answers. Stage 1 (baseline): basic vector search, top-5 chunks. Stage 2: add hybrid search (vector + BM25 via rank_bm25, alpha=0.5, RRF fusion) — measure hit rate improvement. Stage 3: add Cohere Rerank v3.5 — retrieve top-20, rerank to top-5 — measure improvement over Stage 2. Stage 4: add multi-query retrieval — LLM generates 4 query variants, retrieve for each, deduplicate, pass all to reranker — measure improvement. Stage 5: implement parent-child — index small chunks (200 tokens, 50 overlap), return parent sections (800 tokens) to LLM — measure answer completeness. Stage 6: add contextual retrieval — at ingestion, prepend a one-sentence document context to each chunk, re-embed, and compare retrieval hit rate against Stage 1. Stage 7: implement CRAG — score retrieved chunks for relevance, fall back to web search (Tavily) when avg relevance < 0.4. Run RAGAS evaluation (faithfulness + context_precision + context_recall) on the final pipeline vs the Stage 1 baseline. Report the metric deltas for each stage so you can see which upgrade contributed the most.",
+        stack: ["Cohere API", "rank_bm25", "Qdrant", "RAGAS", "Tavily API", "OpenAI API", "Python"],
+        resources: [
+          { title: "Anthropic Contextual Retrieval", url: "https://www.anthropic.com/news/contextual-retrieval" },
+          { title: "RAGAS Evaluation Framework", url: "https://docs.ragas.io/" },
+          { title: "Cohere Rerank API", url: "https://docs.cohere.com/docs/rerank-2" },
+          { title: "Corrective RAG Paper", url: "https://arxiv.org/abs/2401.15884" },
+        ],
       },
     ],
   },
@@ -4384,18 +6299,329 @@ Retry with exponential backoff for transient failures`,
         label: "ReAct & Planner-Executor",
         level: "intermediate",
         concept:
-          "ReAct (Reason + Act) is the foundational agent pattern: alternate between Thought (internal reasoning) and Action (tool call), building up an Observation log. RAG agents combine retrieval with generation — retrieve context, then generate an answer grounded in retrieved documents. Planner-Executor separates planning (decompose task into steps) from execution (run each step) — better for complex multi-step tasks.",
+          "ReAct (Reason + Act) is the foundational pattern behind almost every modern AI agent — ChatGPT Deep Research, Claude Code, Cursor, OpenAI Agents SDK, and LangGraph all build on it. The core idea: instead of answering immediately, the agent alternates between Thought (internal reasoning about what to do) and Action (a tool call), then reads the Observation (tool result) and thinks again. This loop continues until the goal is achieved. It is simple, dynamic, and naturally handles tool use — the agent adapts as new information arrives from each observation.\n\nReAct has one key weakness: it has no long-term plan. The agent only reasons about the immediately next action. For short tasks this is fine. For complex, multi-step tasks — 'research AI startups, compare funding rounds, and write a structured report' — ReAct can become inefficient, looping without a clear strategy. Planner-Executor solves this by separating thinking from doing. The Planner receives the goal and generates a structured task list up front. The Executor then works through each task, using tools as needed, and reports results back. The Planner reviews results and replans if anything fails.\n\nIn practice, the most powerful agents combine both: a Planner creates the strategy, and a ReAct loop drives each execution step. This gives you strategic decomposition at the top level and adaptive, tool-using execution at the step level. Claude Code uses exactly this pattern — a high-level plan over the task, with ReAct-style read-think-edit-run loops inside each step. Understanding when to use ReAct alone, Planner-Executor alone, and the hybrid is one of the core architectural skills of an agent engineer.",
+        deepDive: `ReAct and Planner-Executor are not competing architectures — they solve different problems and are often used together.
+
+Why Agent Architectures Exist
+
+A traditional LLM call:
+
+Question → LLM → Answer
+
+One response. No iteration. Works for simple Q&A.
+
+For complex tasks:
+
+Research top AI startups, compare funding, generate report.
+
+A single response cannot do this. The agent needs to search, read results, search again, compare, and write — multiple rounds of thinking and acting. Agent architectures define how this multi-step process is structured.
+
+PART 1: REACT
+
+ReAct was introduced in a 2022 paper from Google Brain and Princeton. The insight was simple: combine reasoning and acting in an interleaved loop. The model thinks about what to do, does it, observes the result, thinks about what to do next, and repeats.
+
+ReAct Loop
+
+Thought: internal reasoning — what do I need? what tool should I use?
+Action: a tool call — search, execute, read, write
+Observation: the tool's return value — what happened?
+
+Loop:
+
+Thought → Action → Observation → Thought → Action → Observation → ... → Final Answer
+
+Implementation from scratch:
+
+import json
+from openai import OpenAI
+
+client = OpenAI()
+
+def react_agent(goal: str, tools: list, max_iterations: int = 10) -> str:
+    messages = [
+        {"role": "system", "content": "You are an agent. Think step by step. Use tools when needed."},
+        {"role": "user",   "content": goal}
+    ]
+
+    for i in range(max_iterations):
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=messages,
+            tools=tools,
+            tool_choice="auto"
+        )
+        message = response.choices[0].message
+        messages.append(message)
+
+        # No tool calls — agent has finished
+        if not message.tool_calls:
+            return message.content
+
+        # Execute each tool call (Observation phase)
+        for tc in message.tool_calls:
+            result = execute_tool(tc.function.name, json.loads(tc.function.arguments))
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tc.id,
+                "content": json.dumps(result)
+            })
+
+    return "Max iterations reached"
+
+The loop is the entire architecture. There is no planner, no task list — just Thought → Action → Observation repeated until the model stops calling tools.
+
+Logging the ReAct trace:
+
+def react_agent_verbose(goal: str, tools: list) -> str:
+    messages = [...]
+    iteration = 0
+
+    while True:
+        response = call_llm(messages, tools)
+        message = response.choices[0].message
+
+        if not message.tool_calls:
+            print(f"[{iteration}] ANSWER: {message.content}")
+            return message.content
+
+        for tc in message.tool_calls:
+            print(f"[{iteration}] THOUGHT → ACTION: {tc.function.name}({tc.function.arguments})")
+            result = execute_tool(tc.function.name, json.loads(tc.function.arguments))
+            print(f"[{iteration}] OBSERVATION: {str(result)[:200]}")
+            messages.append(tool_result_message(tc.id, result))
+
+        iteration += 1
+
+Run this during development. Watching the Thought → Action → Observation trace tells you exactly where the agent gets confused, loops, or uses the wrong tool.
+
+ReAct Example Trace
+
+Goal: "What is the current population of Japan and how has it changed in the last decade?"
+
+[0] ACTION: search_web("Japan population 2025")
+[0] OBSERVATION: "Japan's population is approximately 123.2 million as of 2025..."
+
+[1] ACTION: search_web("Japan population 2015 trend")
+[1] OBSERVATION: "Japan's population was 127 million in 2015, declining due to..."
+
+[2] ANSWER: "Japan's population is 123.2 million in 2025, down from 127 million in 2015 — a decline of roughly 3.8 million over a decade, driven by low birth rates and limited immigration."
+
+Three steps. Two tool calls. The agent decided it had enough information after the second observation and produced the final answer.
+
+ReAct Safeguards
+
+Infinite loop prevention:
+
+max_iterations = 15  # never exceed this
+
+Budget enforcement:
+
+total_tokens = sum(count_tokens(m) for m in messages)
+if total_tokens > 50_000:
+    return "Token budget exceeded — stopping"
+
+Repetition detection:
+
+last_actions = [tc.function.name for m in messages if hasattr(m, 'tool_calls') for tc in (m.tool_calls or [])]
+if len(last_actions) >= 3 and len(set(last_actions[-3:])) == 1:
+    return "Agent appears stuck in a loop — stopping"
+
+PART 2: PLANNER-EXECUTOR
+
+For complex tasks, ReAct without a plan is inefficient. The agent figures out strategy one step at a time, which often leads to redundant actions and missed coverage.
+
+Planner-Executor separates planning from execution:
+
+Planner — LLM receives the goal and generates a structured plan: a list of tasks, in order, with dependencies.
+Executor — works through each task in the plan, using tools as needed, and returns results.
+Planner (again) — reviews the results, identifies failures, and replans if necessary.
+
+Implementation:
+
+import json
+from dataclasses import dataclass
+
+@dataclass
+class Task:
+    id: str
+    description: str
+    tool: str
+    args: dict
+    depends_on: list[str] = None
+
+def planner(goal: str) -> list[Task]:
+    prompt = f"""Break this goal into a list of tasks. Return JSON array.
+Each task: {{"id": "t1", "description": "...", "tool": "tool_name", "args": {{}}, "depends_on": []}}
+
+Goal: {goal}"""
+    raw = llm_call(prompt)
+    tasks_json = json.loads(raw)
+    return [Task(**t) for t in tasks_json]
+
+def executor(tasks: list[Task]) -> dict[str, any]:
+    results = {}
+    for task in tasks:
+        # Wait for dependencies
+        if task.depends_on:
+            for dep_id in task.depends_on:
+                if dep_id not in results:
+                    raise ValueError(f"Dependency {dep_id} not yet completed")
+
+        # Execute the task
+        result = execute_tool(task.tool, task.args)
+        results[task.id] = result
+        print(f"[EXECUTOR] {task.id}: {task.description} → done")
+
+    return results
+
+def replanner(goal: str, original_tasks: list[Task], results: dict) -> list[Task]:
+    completed = [t for t in original_tasks if t.id in results]
+    failed = [t for t in original_tasks if t.id not in results]
+    if not failed:
+        return []
+
+    prompt = f"""Goal: {goal}
+Completed: {[t.description for t in completed]}
+Failed: {[t.description for t in failed]}
+Results so far: {json.dumps({k: str(v)[:200] for k, v in results.items()})}
+
+Generate a revised task list to complete the goal. JSON array."""
+    raw = llm_call(prompt)
+    return [Task(**t) for t in json.loads(raw)]
+
+Full Planner-Executor loop:
+
+def planner_executor_agent(goal: str) -> str:
+    tasks = planner(goal)
+    print(f"[PLAN] {len(tasks)} tasks generated")
+
+    results = executor(tasks)
+
+    # Check if replanning needed
+    if len(results) < len(tasks):
+        revised = replanner(goal, tasks, results)
+        if revised:
+            additional = executor(revised)
+            results.update(additional)
+
+    # Synthesize final answer
+    return synthesize(goal, results)
+
+Planner-Executor Example
+
+Goal: "Create a competitor analysis report for OpenAI."
+
+Plan generated:
+t1: Search for OpenAI competitors (depends_on: [])
+t2: Get funding data for each competitor (depends_on: [t1])
+t3: Get product comparison (depends_on: [t1])
+t4: Analyze market positioning (depends_on: [t2, t3])
+t5: Write structured report (depends_on: [t4])
+
+Executor runs t1 → feeds output into t2 and t3 → merges → t4 → t5.
+
+PART 3: HYBRID ARCHITECTURE
+
+The most powerful agents use both. The Planner creates the strategy. Each execution step runs a ReAct loop.
+
+def hybrid_agent(goal: str) -> str:
+    # Step 1: Plan
+    tasks = planner(goal)
+
+    # Step 2: Execute each task with a ReAct sub-loop
+    results = {}
+    for task in tasks:
+        task_result = react_agent(
+            goal=task.description,
+            tools=get_tools_for_task(task),
+            context=results  # pass prior results as context
+        )
+        results[task.id] = task_result
+
+    # Step 3: Replan if needed
+    if any_task_failed(results):
+        revised = replanner(goal, tasks, results)
+        for task in revised:
+            results[task.id] = react_agent(task.description, tools=get_tools_for_task(task))
+
+    # Step 4: Synthesize
+    return synthesize(goal, results)
+
+This is the pattern behind Deep Research, Devin, and Manus.
+
+Planner provides: strategy, coverage, parallelism opportunities.
+ReAct provides: adaptability, tool use, dynamic response to observations.
+
+When to Use Each
+
+ReAct alone:
+Interactive chat agents — user is in the loop, tasks are short
+Simple research (1–3 tool calls)
+When flexibility matters more than coverage
+
+Planner-Executor alone:
+Well-defined multi-step workflows with known task structure
+Business automation (onboarding, report generation, data pipelines)
+When predictability and auditability matter
+
+Hybrid (Planner + ReAct per task):
+Complex autonomous research (Deep Research style)
+Coding agents (plan the feature, then ReAct-loop through read/edit/test)
+Enterprise workflows where tasks are complex but the high-level structure is known
+
+ReAct vs Planner-Executor
+
+ReAct:
+Immediate decision focus
+Minimal upfront planning
+High flexibility, adapts to new information
+Best for: chat agents, simple research, interactive tasks
+Risk: can loop without direction on complex tasks
+
+Planner-Executor:
+Task decomposition focus
+Extensive upfront planning
+Structured, predictable, auditable
+Best for: complex workflows, research projects, coding
+Risk: plan may be wrong, environment changes invalidate it
+
+Failure Modes and Safeguards
+
+ReAct failures:
+Infinite loops → enforce max_iterations (10–25)
+Tool overuse → enforce per-tool call limits
+No strategic coverage → switch to hybrid if task is complex
+
+Planner-Executor failures:
+Bad initial plan → add plan review step before execution
+Outdated plan → monitor execution results, trigger replanning on failure
+Overplanning → cap plan depth to 8–10 tasks; executor handles sub-steps
+
+Production monitoring:
+Log every Thought → Action → Observation triple
+Track total tokens per task (set budget alerts)
+Record step count distribution — consistent outliers signal architecture problems`,
         keyPoints: [
-          "ReAct loop: Thought → Action → Observation → Thought → ... → Final Answer",
-          "RAG agent: add a retrieve() tool — agent decides when to search vs when it already knows",
-          "Planner-Executor: Planner LLM creates a step-by-step plan; Executor runs each step",
-          "Plan format: JSON list of steps with tool, args, and expected output",
-          "Dynamic re-planning: Executor reports back; Planner adjusts if a step fails",
+          "ReAct loop: Thought (internal reasoning) → Action (tool call) → Observation (result) → repeat until no tool calls",
+          "ReAct is simple to implement — one function calling loop; the model stops calling tools when it has enough to answer",
+          "Log every Thought/Action/Observation during development — the trace reveals exactly where the agent loops or goes wrong",
+          "ReAct safeguards: max_iterations (10–25), token budget, repetition detection (same tool 3× in a row → stop)",
+          "Planner-Executor: Planner LLM generates a structured JSON task list up front; Executor runs each task in order",
+          "Tasks have depends_on fields — task t3 waits for t2's result before executing",
+          "Replanner: reviews completed tasks and results, generates revised task list for anything that failed",
+          "Hybrid = Planner creates strategy + ReAct loop runs each individual task — used by Deep Research, Devin, Claude Code",
+          "ReAct alone: best for short, interactive, adaptive tasks where flexibility > coverage",
+          "Planner-Executor alone: best for well-defined multi-step workflows with known structure and auditability requirements",
+          "Hybrid: best for complex autonomous research, coding agents, enterprise workflows with unknown sub-task complexity",
+          "Production: log step counts per task, set token budget alerts, treat consistent outliers as architecture signals",
         ],
         project:
-          "Build all 3 architectures for the same task (research + write a report): ReAct agent, RAG agent (with vector DB), and Planner-Executor. Measure: task completion rate, number of steps, total tokens used, and time to completion. Understand when to use each architecture.",
-        stack: ["Python", "OpenAI API", "pgvector"],
-        resources: [],
+          "Build all three architectures for the same task: 'Research the top 3 AI coding assistants, compare their features and pricing, and write a structured comparison report.' Architecture 1 — pure ReAct: one agent loop with search_web, read_url, and write_file tools. Add verbose logging of every Thought/Action/Observation. Enforce max_iterations=15 and a 40K token budget. Architecture 2 — pure Planner-Executor: Planner generates a JSON task list (5–8 tasks with depends_on), Executor runs each using the same tools, Replanner checks for failures and revises. Architecture 3 — hybrid: Planner generates 4 high-level tasks (research each tool, compare, write), each task runs its own ReAct sub-loop. Measure all three on: task completion quality (human eval 1–5), total steps taken, total tokens consumed, and wall-clock time. Add a fourth measurement: break one tool mid-run (make search_web fail on the 3rd call) and observe how each architecture handles the failure — ReAct adapts, pure Planner fails unless Replanner kicks in, Hybrid handles it at the task level. Report which architecture performed best for this task type and why.",
+        stack: ["Python", "OpenAI API", "Anthropic API", "Tavily API"],
+        resources: [
+          { title: "ReAct Paper — Reason + Act", url: "https://arxiv.org/abs/2210.03629" },
+          { title: "OpenAI Agents SDK", url: "https://openai.github.io/openai-agents-python/" },
+        ],
       },
       {
         id: "arch-advanced",
@@ -4403,18 +6629,356 @@ Retry with exponential backoff for transient failures`,
         label: "DAG & Multi-Agent Systems",
         level: "advanced",
         concept:
-          "DAG (Directed Acyclic Graph) agents represent task dependencies as a graph — independent steps run in parallel, dependent steps wait for their prerequisites. Multi-agent systems have specialized agents collaborating: a Supervisor delegates to specialists (Research, Writing, Coding agents). Self-critique agents generate output, then critique it, then revise — multiple passes improve quality significantly.",
+          "When a task becomes too large for a single agent — research 100 companies, analyze competitors, generate a report, then review findings — two architectural patterns solve the problem: DAGs and multi-agent systems. A DAG (Directed Acyclic Graph) represents a workflow as nodes (tasks) connected by edges (dependencies). Tasks with no dependency on each other run in parallel; tasks that need a prior result wait. This structure is what makes complex pipelines fast, scalable, and debuggable. LangGraph is built entirely around this model.\n\nA multi-agent system goes further by assigning each node to a specialized agent — a separate LLM call with its own system prompt, tools, and responsibility. A Research Agent knows how to search and extract. A Writer Agent knows how to structure and compose. A Reviewer Agent knows how to fact-check and critique. Specialization produces higher quality output than asking one general agent to do everything. The Supervisor pattern is the most common structure: one orchestrator agent decomposes the goal, delegates tasks to specialists, collects results, and synthesizes the final output.\n\nMost production systems combine both patterns. The DAG defines the workflow topology — which tasks run in parallel, which wait for dependencies. Multi-agent assignment gives each node a specialized identity. Shared memory (a state dict passed through the graph) lets every agent read prior results and write its own outputs. This is the architecture behind ChatGPT Deep Research, Manus, and enterprise AI platforms — parallel specialist agents executing a structured workflow with a coordinator synthesizing the final result.",
+        deepDive: `DAGs and multi-agent systems address the same root problem from different angles: a single agent trying to do everything breaks down at scale.
+
+PART 1: DAGs
+
+What is a DAG?
+
+Directed Acyclic Graph:
+Directed — information flows in a specific direction
+Acyclic — no cycles (no infinite loops)
+Graph — tasks are nodes, dependencies are edges
+
+In agent systems: nodes are tasks or agent calls, edges encode "this task must complete before that one can start."
+
+Sequential DAG (all tasks depend on the previous):
+
+Task A → Task B → Task C → Task D
+
+Branching DAG (independent tasks run in parallel):
+
+           Task A
+          /       \
+     Task B     Task C
+          \       /
+           Task D
+
+Task B and C run simultaneously. Task D waits for both.
+
+Why DAGs matter
+
+Without a DAG:
+
+One agent runs everything sequentially.
+Total time = sum of all task durations.
+
+With a parallel DAG:
+
+Independent tasks run concurrently.
+Total time = longest path through the graph (critical path).
+
+For a research pipeline with 4 independent searches:
+Sequential: 4 × 3s = 12s
+Parallel DAG: 3s (all run at once)
+
+DAG Implementation with asyncio
+
+from dataclasses import dataclass, field
+import asyncio
+
+@dataclass
+class DAGNode:
+    id: str
+    fn: callable
+    args: dict = field(default_factory=dict)
+    depends_on: list[str] = field(default_factory=list)
+
+async def execute_dag(nodes: list[DAGNode]) -> dict[str, any]:
+    results = {}
+    completed = set()
+    node_map = {n.id: n for n in nodes}
+
+    async def run_node(node: DAGNode):
+        # Wait for all dependencies
+        while not all(dep in completed for dep in node.depends_on):
+            await asyncio.sleep(0.01)
+
+        # Inject dependency results into args
+        dep_results = {dep: results[dep] for dep in node.depends_on}
+        result = await node.fn(**node.args, **dep_results)
+        results[node.id] = result
+        completed.add(node.id)
+
+    await asyncio.gather(*[run_node(n) for n in nodes])
+    return results
+
+Example — Research DAG:
+
+nodes = [
+    DAGNode("search_companies", search_web, args={"query": "top AI startups 2025"}),
+    DAGNode("search_funding",   search_web, args={"query": "AI startup funding 2025"}),
+    DAGNode("search_products",  search_web, args={"query": "AI products comparison 2025"}),
+    DAGNode("analyze",          analyze_fn, depends_on=["search_companies", "search_funding", "search_products"]),
+    DAGNode("write_report",     write_fn,   depends_on=["analyze"]),
+]
+
+results = await execute_dag(nodes)
+
+All three search nodes fire simultaneously. Analyze waits for all three. write_report waits for analyze.
+
+Critical Path
+
+The critical path is the longest chain of dependencies — it determines the total execution time.
+
+Optimization: identify the critical path and prioritize reducing latency on those nodes.
+Independent tasks not on the critical path can be slow without affecting total time.
+
+PART 2: MULTI-AGENT SYSTEMS
+
+Why Specialization Works
+
+A single general-purpose agent asked to research, analyze, write, and review has context split across all four concerns. Each task suffers.
+
+Specialized agents:
+Research Agent — its entire system prompt, tool list, and reasoning pattern is optimized for search and extraction.
+Writer Agent — optimized for structure, coherence, and clarity.
+Reviewer Agent — optimized for fact-checking, gap identification, and critique.
+
+Each agent is better at its job because it only has one job.
+
+Agent as a Function
+
+The simplest mental model: an agent is just an async function.
+
+async def research_agent(query: str, tools: list) -> str:
+    return await llm_call(
+        system="You are a research specialist. Search thoroughly and extract key facts.",
+        user=query,
+        tools=tools
+    )
+
+async def writer_agent(research_results: str, format: str) -> str:
+    return await llm_call(
+        system="You are a professional writer. Structure findings clearly and concisely.",
+        user=f"Write a {format} based on:\n{research_results}"
+    )
+
+async def reviewer_agent(draft: str, criteria: str) -> str:
+    return await llm_call(
+        system="You are a critical reviewer. Identify gaps, errors, and improvements.",
+        user=f"Review this against criteria: {criteria}\n\nDraft:\n{draft}"
+    )
+
+Each agent has: a focused system prompt, appropriate tools, and a single well-defined responsibility.
+
+Multi-Agent Patterns
+
+1. Supervisor Pattern (most common)
+
+One orchestrator agent receives the goal, decomposes it, delegates to specialists, and synthesizes the output.
+
+async def supervisor_agent(goal: str) -> str:
+    # Step 1: Decompose
+    subtasks = await llm_call(
+        system="You are a project manager. Break goals into specialist tasks.",
+        user=f"Decompose: {goal}\nReturn JSON: [{{'agent': 'research|write|review', 'task': '...'}}]"
+    )
+    tasks = json.loads(subtasks)
+
+    # Step 2: Delegate in parallel where possible
+    research_tasks = [t for t in tasks if t["agent"] == "research"]
+    research_results = await asyncio.gather(*[
+        research_agent(t["task"], tools=search_tools) for t in research_tasks
+    ])
+
+    # Step 3: Write
+    draft = await writer_agent(
+        research_results="\n\n".join(research_results),
+        format="structured report"
+    )
+
+    # Step 4: Review
+    review = await reviewer_agent(draft, criteria="accuracy, completeness, clarity")
+
+    # Step 5: Revise if needed
+    if "REVISION NEEDED" in review:
+        draft = await writer_agent(f"{draft}\n\nReview feedback:\n{review}", format="revised report")
+
+    return draft
+
+2. Peer-to-Peer Pattern
+
+Agents pass messages directly without a central coordinator.
+Used in debate-style systems where agents challenge each other's outputs.
+
+async def peer_review_loop(proposal: str, rounds: int = 3) -> str:
+    agent_a_position = proposal
+    for _ in range(rounds):
+        critique = await critic_agent(agent_a_position)
+        agent_a_position = await proposer_agent(f"Revise given critique:\n{critique}\n\nOriginal:\n{agent_a_position}")
+    return agent_a_position
+
+3. Hierarchical Pattern
+
+Manager agents coordinate team leads, who coordinate workers.
+Used in very large systems where no single agent can oversee everything.
+
+Manager Agent
+↓
+Team Lead A         Team Lead B
+↓         ↓         ↓         ↓
+Worker 1  Worker 2  Worker 3  Worker 4
+
+Manager sees only team lead outputs.
+Team leads see only their workers' outputs.
+
+4. Self-Critique Pattern
+
+One agent generates, another critiques, the first revises.
+Dramatically improves output quality — like a human editing their own work with fresh eyes.
+
+async def self_critique(task: str, iterations: int = 2) -> str:
+    draft = await generator_agent(task)
+    for i in range(iterations):
+        critique = await critic_agent(
+            f"Critique this output. Be specific about what is wrong or missing:\n{draft}"
+        )
+        if "LOOKS GOOD" in critique:
+            break
+        draft = await generator_agent(
+            f"Revise based on this critique:\n{critique}\n\nCurrent draft:\n{draft}"
+        )
+    return draft
+
+Used by: coding agents (generate → test → fix), writing agents (draft → critique → revise), research agents (find → verify → expand).
+
+Agent Communication via Shared State
+
+The cleanest way for agents to share information is a shared state dict passed through the pipeline.
+
+@dataclass
+class PipelineState:
+    goal: str
+    research: dict = field(default_factory=dict)
+    analysis: str = ""
+    draft: str = ""
+    review: str = ""
+    final: str = ""
+
+async def research_node(state: PipelineState) -> PipelineState:
+    state.research = await research_agent(state.goal)
+    return state
+
+async def analysis_node(state: PipelineState) -> PipelineState:
+    state.analysis = await analysis_agent(state.research)
+    return state
+
+async def write_node(state: PipelineState) -> PipelineState:
+    state.draft = await writer_agent(state.analysis)
+    return state
+
+# Sequential pipeline
+state = PipelineState(goal=user_goal)
+state = await research_node(state)
+state = await analysis_node(state)
+state = await write_node(state)
+
+Every agent reads from state and writes back to state. No agent needs to know about agents other than what state fields it reads and writes.
+
+PART 3: COMBINED DAG + MULTI-AGENT
+
+The most powerful architecture: a DAG workflow where each node is a specialized agent.
+
+async def deep_research_system(topic: str) -> str:
+    state = ResearchState(topic=topic)
+
+    # Phase 1: Parallel research (DAG — all independent)
+    web_results, pdf_results, db_results = await asyncio.gather(
+        web_search_agent(topic),
+        pdf_search_agent(topic),
+        database_agent(topic)
+    )
+
+    # Phase 2: Analysis (depends on all three)
+    state.analysis = await analysis_agent(web_results, pdf_results, db_results)
+
+    # Phase 3: Write (depends on analysis)
+    state.draft = await writer_agent(state.analysis)
+
+    # Phase 4: Review + Revise loop
+    for _ in range(2):
+        review = await reviewer_agent(state.draft)
+        if review.score >= 8:
+            break
+        state.draft = await writer_agent(state.draft, feedback=review.feedback)
+
+    return state.draft
+
+This is the pattern behind ChatGPT Deep Research and Manus.
+
+Real Production Architecture
+
+User Query
+↓
+Planner Agent (decomposes goal into DAG)
+↓
+Parallel Research Phase (DAG nodes running concurrently):
+  Web Search Agent | PDF Extraction Agent | Database Agent
+↓
+Analysis Agent (waits for all research)
+↓
+Writer Agent (depends on analysis)
+↓
+Reviewer Agent (self-critique loop, 2 passes)
+↓
+Final Output
+
+Challenges
+
+Communication overhead: every LLM call costs tokens and latency — minimize message passing between agents.
+Failure propagation: one agent failing can break downstream nodes — add fallbacks at every node.
+Cost: N agents × M iterations = N×M LLM calls — set token budgets per agent.
+Debugging: log every agent's input and output with timestamps and token counts.
+
+Monitoring a multi-agent run:
+
+async def monitored_agent(name: str, fn: callable, *args, **kwargs):
+    start = time.time()
+    result = await fn(*args, **kwargs)
+    elapsed = time.time() - start
+    tokens = count_tokens(str(result))
+    log.info(f"agent={name} duration={elapsed:.2f}s tokens={tokens}")
+    return result
+
+When to Use Each Architecture
+
+Single ReAct agent:
+Simple tasks (1–5 tool calls), interactive chat, unknown task structure
+
+Planner-Executor:
+Well-defined multi-step tasks, business automation, auditable workflows
+
+Parallel DAG:
+Independent subtasks that can run concurrently, when latency matters
+
+Multi-Agent Supervisor:
+Complex tasks requiring specialized skills, quality-critical outputs (write + review)
+
+Combined DAG + Multi-Agent:
+Large-scale autonomous research, enterprise knowledge workflows, coding agents on full features`,
         keyPoints: [
-          "DAG execution: identify independent tasks → asyncio.gather() → merge results",
-          "Supervisor pattern: receives goal → decomposes → delegates → synthesizes",
-          "Specialist agents: one system prompt per specialty — Research, Coding, Writing, Analysis",
-          "Self-critique: generate → critique with a separate LLM call → revise → repeat N times",
-          "Reflection agent: evaluate its own trajectory and decide to retry a failed step",
+          "DAG: nodes = tasks, edges = dependencies — independent nodes run in parallel with asyncio.gather(), dependent nodes wait",
+          "Critical path: the longest dependency chain determines total runtime — optimize the critical path first",
+          "DAG speedup: 4 independent searches sequentially = 12s; in parallel DAG = 3s (critical path only)",
+          "Supervisor pattern: orchestrator decomposes goal → delegates to specialists in parallel → collects results → synthesizes",
+          "Specialist agent = async function with a focused system prompt + purpose-specific tools — one job, done well",
+          "Shared state dict: every agent reads from and writes to PipelineState — clean handoff, no direct agent coupling",
+          "Self-critique pattern: generator → critic → revise → repeat N times — used in coding, writing, and research agents",
+          "Peer-to-peer: agents pass messages directly without coordinator — debate style, proposal/critique loops",
+          "Combined DAG + multi-agent: parallel specialized agents in Phase 1, sequential dependent agents in Phase 2+",
+          "Monitoring: log agent name, duration, token count on every call — multi-agent systems are expensive and slow without visibility",
+          "Failure handling: add fallback at every node — one agent failing should not crash the pipeline",
+          "Cost control: N agents × M iterations = N×M LLM calls — set per-agent token budgets before deployment",
         ],
         project:
-          "Build a multi-agent research system: Supervisor agent receives a research question, delegates to 3 specialists (WebSearch agent, DatabaseQuery agent, Synthesis agent), collects their outputs, and produces a final report. Implement parallel execution for the two research agents. Add a reflection step that identifies gaps and spawns additional searches.",
-        stack: ["Python", "asyncio", "OpenAI API"],
-        resources: [],
+          "Build a multi-agent research pipeline using DAG + supervisor architecture. The system takes a topic and produces a structured report. Phase 1 — parallel DAG (3 specialized agents run concurrently via asyncio.gather()): WebSearchAgent (Tavily, returns top 10 results), PDFAgent (reads 2 local PDFs about the topic), and DataAgent (queries a local SQLite DB with structured facts). Phase 2 — AnalysisAgent (waits for all three Phase 1 results, identifies key themes and contradictions). Phase 3 — WriterAgent (produces a structured 5-section report). Phase 4 — ReviewerAgent (scores the draft 1–10 on accuracy, completeness, and clarity; if score < 7 returns specific feedback). Phase 5 — RevisionLoop (WriterAgent revises based on feedback; max 2 rounds). Add a SupervisorAgent that orchestrates all phases and a monitored_agent() wrapper that logs agent name, duration, and token count for every call. Implement failure handling: if any Phase 1 agent fails, log and continue with the other two. Measure total wall-clock time vs sequential execution of the same tasks. Compare output quality: single ReAct agent vs the multi-agent pipeline on the same topic using human evaluation (1–5 score on depth, accuracy, structure).",
+        stack: ["Python", "asyncio", "OpenAI API", "Anthropic API", "Tavily API", "SQLite"],
+        resources: [
+          { title: "LangGraph Multi-Agent Docs", url: "https://langchain-ai.github.io/langgraph/concepts/multi_agent/" },
+          { title: "OpenAI Agents SDK — Handoffs", url: "https://openai.github.io/openai-agents-python/handoffs/" },
+        ],
       },
       {
         id: "arch-orchestration",
