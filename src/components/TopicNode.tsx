@@ -67,7 +67,7 @@ export function TopicNode({
       <span
         style={{
           fontSize: 10.5,
-          color: isDone ? "#303040" : isActive ? "#c0c0d8" : "#6a6a88",
+          color: isDone ? "#555570" : isActive ? "#c0c0d8" : "#6a6a88",
           textAlign: "center",
           marginTop: 8,
           lineHeight: 1.4,
