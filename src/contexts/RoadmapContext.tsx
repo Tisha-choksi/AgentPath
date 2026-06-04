@@ -18,7 +18,9 @@ interface RoadmapContextValue {
 const RoadmapContext = createContext<RoadmapContextValue>(null!);
 
 export function useRoadmap() {
-  return useContext(RoadmapContext);
+  const ctx = useContext(RoadmapContext);
+  if (!ctx) throw new Error("useRoadmap must be used inside RoadmapProvider");
+  return ctx;
 }
 
 export function RoadmapProvider({
