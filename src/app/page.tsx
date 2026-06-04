@@ -3,6 +3,7 @@ import { backendData } from "@/data/backend";
 import { gitData } from "@/data/git";
 import { restApiData } from "@/data/rest-api";
 import { roadmapData } from "@/data/roadmap";
+import { PrerequisiteCards, AgentsCard } from "@/components/HubCards";
 
 const prerequisites = [
   {
@@ -10,7 +11,7 @@ const prerequisites = [
     icon: "⚙️",
     title: "Backend Development",
     description:
-      "HTTP, Node.js, Express, databases, auth, and deployment. The foundation every agent developer needs.",
+      "From Python basics to Docker, CI/CD, system design, AWS, and real-time architecture. Full 16-phase path.",
     accent: "#3B82F6",
     bg: "#0d1929",
     topics: backendData.reduce((acc, p) => acc + p.nodes.length, 0),
@@ -21,7 +22,7 @@ const prerequisites = [
     icon: "🌿",
     title: "Git & Terminal",
     description:
-      "Command line navigation, version control, branching, and collaborating on GitHub.",
+      "Full 22-phase path: Git fundamentals to GitHub Actions, APIs, hooks, LFS, and CI/CD for AI engineers.",
     accent: "#F97316",
     bg: "#1f1208",
     topics: gitData.reduce((acc, p) => acc + p.nodes.length, 0),
@@ -29,10 +30,10 @@ const prerequisites = [
   },
   {
     href: "/rest-api",
-    icon: "📡",
-    title: "REST API Knowledge",
+    icon: "⚡",
+    title: "FastAPI",
     description:
-      "HTTP methods, status codes, auth patterns, consuming APIs, and building your own.",
+      "Full 18-phase path: routing, Pydantic, auth, databases, real-time, AI integrations, and agent backends.",
     accent: "#34D399",
     bg: "#0a1f18",
     topics: restApiData.reduce((acc, p) => acc + p.nodes.length, 0),
@@ -98,25 +99,13 @@ export default function HubPage() {
             <span style={{ color: "#7F77DD" }}>Agent</span>Path
           </span>
         </div>
-
-        <span
-          style={{
-            fontSize: 11,
-            color: "#2a2a3a",
-            fontFamily: "monospace",
-          }}
-        >
+        <span style={{ fontSize: 11, color: "#2a2a3a", fontFamily: "monospace" }}>
           learn · build · ship
         </span>
       </nav>
 
       {/* Hero */}
-      <div
-        style={{
-          textAlign: "center",
-          padding: "56px 24px 40px",
-        }}
-      >
+      <div style={{ textAlign: "center", padding: "56px 24px 40px" }}>
         <div
           style={{
             display: "inline-flex",
@@ -130,12 +119,7 @@ export default function HubPage() {
           }}
         >
           <div
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: "#7F77DD",
-            }}
+            style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD" }}
           />
           <span style={{ fontSize: 11, color: "#8580bb" }}>
             Your complete AI Agent learning path
@@ -173,14 +157,8 @@ export default function HubPage() {
       </div>
 
       {/* Main content */}
-      <div
-        style={{
-          maxWidth: 860,
-          margin: "0 auto",
-          padding: "0 24px 80px",
-        }}
-      >
-        {/* Step 1: Prerequisites */}
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 24px 80px" }}>
+        {/* Step 1 */}
         <div style={{ marginBottom: 40 }}>
           <div
             style={{
@@ -222,135 +200,10 @@ export default function HubPage() {
             <div style={{ flex: 1, height: 1, background: "#1a1a22" }} />
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: 12,
-            }}
-          >
-            {prerequisites.map((p) => (
-              <Link
-                key={p.href}
-                href={p.href}
-                style={{ textDecoration: "none" }}
-              >
-                <div
-                  style={{
-                    background: "#111116",
-                    border: "1px solid #1c1c24",
-                    borderRadius: 14,
-                    overflow: "hidden",
-                    transition: "border-color 0.2s, transform 0.15s, box-shadow 0.2s",
-                    cursor: "pointer",
-                    height: "100%",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.borderColor = `${p.accent}66`;
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 32px rgba(0,0,0,0.4)`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.borderColor = "#1c1c24";
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-                  }}
-                >
-                  {/* Accent top bar */}
-                  <div style={{ height: 3, background: p.accent }} />
-
-                  <div style={{ padding: "18px 18px 16px" }}>
-                    {/* Icon */}
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: 12,
-                        background: p.bg,
-                        border: `1px solid ${p.accent}28`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 22,
-                        marginBottom: 14,
-                      }}
-                    >
-                      {p.icon}
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 700,
-                        color: "#ddd",
-                        marginBottom: 8,
-                        fontFamily: "var(--font-sans)",
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {p.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p
-                      style={{
-                        fontSize: 12,
-                        color: "#44445a",
-                        lineHeight: 1.6,
-                        marginBottom: 16,
-                        fontFamily: "var(--font-sans)",
-                      }}
-                    >
-                      {p.description}
-                    </p>
-
-                    {/* Footer */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <div style={{ display: "flex", gap: 8 }}>
-                        <span
-                          style={{
-                            fontSize: 10,
-                            color: "#2a2a3a",
-                            padding: "2px 7px",
-                            border: "1px solid #1e1e2a",
-                            borderRadius: 6,
-                            fontFamily: "monospace",
-                          }}
-                        >
-                          {p.phases} phases
-                        </span>
-                        <span
-                          style={{
-                            fontSize: 10,
-                            color: "#2a2a3a",
-                            padding: "2px 7px",
-                            border: "1px solid #1e1e2a",
-                            borderRadius: 6,
-                            fontFamily: "monospace",
-                          }}
-                        >
-                          {p.topics} topics
-                        </span>
-                      </div>
-                      <span style={{ fontSize: 11, color: p.accent }}>
-                        View path →
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <PrerequisiteCards cards={prerequisites} />
         </div>
 
-        {/* Divider arrow */}
+        {/* Divider */}
         <div
           style={{
             display: "flex",
@@ -380,7 +233,7 @@ export default function HubPage() {
           <div style={{ width: 1, height: 28, background: "#1a1a22" }} />
         </div>
 
-        {/* Step 2: AI Agents */}
+        {/* Step 2 */}
         <div>
           <div
             style={{
@@ -422,161 +275,7 @@ export default function HubPage() {
             <div style={{ flex: 1, height: 1, background: "#1a1a22" }} />
           </div>
 
-          <Link href="/agents" style={{ textDecoration: "none" }}>
-            <div
-              style={{
-                background: "#111116",
-                border: "1px solid #2a2840",
-                borderRadius: 16,
-                overflow: "hidden",
-                transition: "border-color 0.2s, transform 0.15s, box-shadow 0.2s",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = "#7F77DD66";
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(0,0,0,0.5)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.borderColor = "#2a2840";
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-              }}
-            >
-              {/* Gradient top bar */}
-              <div
-                style={{
-                  height: 3,
-                  background: "linear-gradient(90deg, #5551aa, #7F77DD, #9d99cc)",
-                }}
-              />
-
-              <div
-                style={{
-                  padding: "24px 28px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 24,
-                }}
-              >
-                {/* Icon group */}
-                <div
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 16,
-                    background: "#16142a",
-                    border: "1px solid #2a2840",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 28,
-                    flexShrink: 0,
-                  }}
-                >
-                  🤖
-                </div>
-
-                <div style={{ flex: 1 }}>
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                      padding: "2px 8px",
-                      borderRadius: 6,
-                      background: "#7F77DD18",
-                      border: "1px solid #7F77DD28",
-                      marginBottom: 8,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: 9,
-                        color: "#7F77DD",
-                        fontWeight: 700,
-                        letterSpacing: "0.12em",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      Main Roadmap
-                    </span>
-                  </div>
-                  <h3
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 700,
-                      color: "#fff",
-                      marginBottom: 6,
-                      fontFamily: "var(--font-sans)",
-                      letterSpacing: "-0.3px",
-                    }}
-                  >
-                    AI Agents Roadmap
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: 13,
-                      color: "#44445a",
-                      fontFamily: "var(--font-sans)",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    LLM fundamentals → agent architecture → memory systems →
-                    planning → multi-agent → production.
-                  </p>
-                </div>
-
-                {/* Stats + CTA */}
-                <div
-                  style={{
-                    flexShrink: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                    gap: 10,
-                  }}
-                >
-                  <div style={{ display: "flex", gap: 6 }}>
-                    <span
-                      style={{
-                        fontSize: 10,
-                        color: "#3a3a4a",
-                        padding: "3px 8px",
-                        border: "1px solid #1e1e2a",
-                        borderRadius: 6,
-                        fontFamily: "monospace",
-                      }}
-                    >
-                      {agentStats.phases} phases
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 10,
-                        color: "#3a3a4a",
-                        padding: "3px 8px",
-                        border: "1px solid #1e1e2a",
-                        borderRadius: 6,
-                        fontFamily: "monospace",
-                      }}
-                    >
-                      {agentStats.topics} topics
-                    </span>
-                  </div>
-                  <span
-                    style={{
-                      fontSize: 13,
-                      color: "#7F77DD",
-                      fontWeight: 600,
-                      fontFamily: "var(--font-sans)",
-                    }}
-                  >
-                    Begin Roadmap →
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
+          <AgentsCard topics={agentStats.topics} phases={agentStats.phases} />
         </div>
       </div>
     </div>
