@@ -492,17 +492,82 @@ export function DetailPanel() {
   );
 }
 
+// ── Code block detection helpers ────────────────────────────────────────────
+
+const CODE_PATTERNS = [
+  /^(import |from .+ import|def |async def |class |@\w)/,
+  /^ {4,}\S/,                                          // 4+ space indent
+  /^(SELECT |INSERT |CREATE |UPDATE |DELETE |ALTER |DROP )/i,
+  /^(const |let |var |function |export default |export function )/,
+  /^(FROM |JOIN |WHERE |GROUP BY|ORDER BY|LIMIT )/i,
+  /^(\s*)([\w_]+)\s*=\s*\S/,                          // assignment
+  /[{}[\]]\s*$/,                                       // trailing bracket
+  /^\s*["\w]+:\s*([\w"[{])/,                          // JSON-like key: value
+  /^(pip |npm |docker |kubectl |git |curl |\$ )/,
+  /=>/,
+  /\bawait\b|\basync\b/,
+];
+
+function isCodeBlock(lines: string[]): boolean {
+  if (lines.length < 2) return false;
+  const matches = lines.filter((l) => CODE_PATTERNS.some((p) => p.test(l))).length;
+  return (
+    matches >= 2 ||
+    (matches >= 1 && lines.some((l) => l.includes("(") && l.includes(")")))
+  );
+}
+
+function detectLanguage(lines: string[]): string {
+  const src = lines.join("\n");
+  if (/^\s*(SELECT|CREATE TABLE|INSERT INTO|DROP TABLE|ALTER TABLE)/im.test(src)) return "sql";
+  if (/^(import |from .+ import|def |async def |class |@app\.|@mcp\.|@dataclass)/m.test(src)) return "python";
+  if (/^(const |let |var |interface |type |export |import .* from)/m.test(src)) return "typescript";
+  if (/^\s*"[\w_-]+"\s*:/m.test(src) || /^\{$/.test(lines[0])) return "json";
+  if (/^(pip |npm |docker |kubectl |git |curl |\$ )/m.test(src)) return "bash";
+  return "python";
+}
+
+// ── DeepDive renderer ────────────────────────────────────────────────────────
+
 function DeepDiveSection({ content, accent }: { content: string; accent: string }) {
-  const blocks = content.split("\n\n").map((b) => b.trim()).filter(Boolean);
+  // Preserve indentation inside code blocks: split on blank lines but keep raw text
+  const rawBlocks = content.split(/\n\n+/);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      {blocks.map((block, i) => {
-        const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+      {rawBlocks.map((rawBlock, i) => {
+        const raw = rawBlock.trim();
+        if (!raw) return null;
+
+        // Raw lines (preserve indentation for code detection)
+        const rawLines = raw.split("\n");
+        // Trimmed lines for display logic
+        const lines = rawLines.map((l) => l.trim()).filter(Boolean);
         const first = lines[0];
         const single = lines.length === 1;
-        const allShort = lines.every((l) => l.length < 56);
+        const allShort = lines.every((l) => l.length < 60);
         const hasPipeline = lines.some((l) => l === "↓");
+
+        // ── Code block (check before other multi-line rules)
+        if (!hasPipeline && isCodeBlock(rawLines)) {
+          const lang = detectLanguage(rawLines);
+          // Dedent: find minimum indent of non-empty lines
+          const nonEmpty = rawLines.filter((l) => l.trim().length > 0);
+          const minIndent = nonEmpty.reduce((min, l) => {
+            const indent = l.match(/^(\s*)/)?.[1].length ?? 0;
+            return Math.min(min, indent);
+          }, Infinity);
+          const dedented = rawLines
+            .map((l) => l.slice(minIndent === Infinity ? 0 : minIndent))
+            .join("\n")
+            .trim();
+
+          return (
+            <div key={i} style={{ marginTop: 4, marginBottom: 4 }}>
+              <CodeBlock language={lang} snippet={dedented} accent={accent} />
+            </div>
+          );
+        }
 
         // ── Major section: "1. Transformers"
         if (single && /^\d+\.\s/.test(first)) {
