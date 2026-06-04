@@ -14,7 +14,7 @@ export function RoadmapCanvas({
   const { phases, completed } = useRoadmap();
   const roadmapData = phases;
   const totalNodes = phases.reduce((acc, p) => acc + p.nodes.length, 0);
-  const progress = Math.round((completed.length / totalNodes) * 100);
+  const progress = totalNodes > 0 ? Math.round((completed.length / totalNodes) * 100) : 0;
 
   return (
     <div style={{ minHeight: "100%", background: "#0c0d10" }}>
@@ -96,7 +96,7 @@ export function RoadmapCanvas({
                   height: 5,
                   borderRadius: "50%",
                   background:
-                    i < Math.round((completed.length / totalNodes) * 8)
+                    i < Math.round((progress / 100) * 8)
                       ? "#7F77DD"
                       : "#1e1e2a",
                   transition: "background 0.4s",
